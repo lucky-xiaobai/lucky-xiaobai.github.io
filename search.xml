@@ -7,6 +7,8 @@
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<span id="more"></span>
+
 <h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
 <p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
@@ -25,6 +27,8 @@
 <h1 id="Linux环境"><a href="#Linux环境" class="headerlink" title="Linux环境"></a>Linux环境</h1><h2 id="学习pwn需要的环境和工具"><a href="#学习pwn需要的环境和工具" class="headerlink" title="学习pwn需要的环境和工具"></a>学习pwn需要的环境和工具</h2><p>需要安装python的第三方库pwntools、gdb的增强版pwndbg、ruby语言里的Onegadget，其他的工具任意，具体安装步骤在B站的星盟pwn讲学的第一章(pwn环境的搭建)。</p>
 <p>ida可以到爱盘(吾爱破解)里面找到</p>
 <p>Ubuntu我装的是20</p>
+<span id="more"></span>
+
 <p><strong>注意：</strong></p>
 <p>在自己编译程序的时候，想要关闭一些保护，方法如下：</p>
 <p><strong>NX</strong>	<code>-z execstack</code> &#x2F; <code>-z noexecstack</code> (关闭 &#x2F; 开启)  不让执行栈上的数据，于是JMP ESP就不能用了</p>
