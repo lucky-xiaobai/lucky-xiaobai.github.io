@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/yue-32x32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/yue-16x16.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"lucky-xiaobai.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="A MATLAB系统环境A.a MATLAB操作界面的组成1 Matlab主窗口  功能区：提供三个选项卡（主页，绘图，应用程序），各自有不同的工具可供使用。 快速访问工具栏：包含一些常用按钮 当前文件夹工具栏：用于实现当前文件夹的操作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(01)Matlab基础知识">
+<meta property="og:url" content="https://lucky-xiaobai.github.io/2022/06/27/Matlab%E4%B8%AD%E5%8D%97%E5%A4%A7%E5%AD%A6%E7%AC%94%E8%AE%B0/%EF%BC%8801%EF%BC%89%E3%80%90Matlab%E3%80%91Matlab%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:site_name" content="vi0let&#39;s blog">
+<meta property="og:description" content="A MATLAB系统环境A.a MATLAB操作界面的组成1 Matlab主窗口  功能区：提供三个选项卡（主页，绘图，应用程序），各自有不同的工具可供使用。 快速访问工具栏：包含一些常用按钮 当前文件夹工具栏：用于实现当前文件夹的操作">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225164148733.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225164656339.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225165313252.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225165444784.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225165545892.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225165715889.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225165949976.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225170539698.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225170658693.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225171150978.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225173043805.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225173117852.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225173216509.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225173308488.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225173359365.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225173742228.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225174501225.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225174641778.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225174828815.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225175107125.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225175522721.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225180657183.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225185102476.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225185751144.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225190113487.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225190331526.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225190517955.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225192208567.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225192454699.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020022519264856.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225192806840.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225195123796.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225200109661.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225201212298.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/202002252008579.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225200943309.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225201114187.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225201258314.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225202516110.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225203322435.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225203609383.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020022520395972.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225204124604.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225204212560.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225204254928.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225204803537.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225204859210.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225205324727.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225205433194.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225205539131.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225205645610.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225205811959.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225205913897.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020022521004121.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225210215622.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225210349514.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225210731220.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225210834666.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225210947381.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225211054779.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225211309602.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225211400528.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225211611641.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225213621487.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225213714464.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225213839358.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225214246795.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020022521453133.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225214652808.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225215346623.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225215325522.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225215655578.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2022-06-27T02:34:58.976Z">
+<meta property="article:modified_time" content="2022-06-27T02:56:40.075Z">
+<meta property="article:author" content="vi0let">
+<meta property="article:tag" content="matlab">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200225164148733.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+
+
+<link rel="canonical" href="https://lucky-xiaobai.github.io/2022/06/27/Matlab%E4%B8%AD%E5%8D%97%E5%A4%A7%E5%AD%A6%E7%AC%94%E8%AE%B0/%EF%BC%8801%EF%BC%89%E3%80%90Matlab%E3%80%91Matlab%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://lucky-xiaobai.github.io/2022/06/27/Matlab%E4%B8%AD%E5%8D%97%E5%A4%A7%E5%AD%A6%E7%AC%94%E8%AE%B0/%EF%BC%8801%EF%BC%89%E3%80%90Matlab%E3%80%91Matlab%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/","path":"2022/06/27/Matlab中南大学笔记/（01）【Matlab】Matlab基础知识/","title":"(01)Matlab基础知识"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>(01)Matlab基础知识 | vi0let's blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+  <a target="_blank" rel="noopener" href="https://github.com/lucky-xiaobai" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">vi0let's blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#A-MATLAB%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">A MATLAB系统环境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#A-a-MATLAB%E6%93%8D%E4%BD%9C%E7%95%8C%E9%9D%A2%E7%9A%84%E7%BB%84%E6%88%90"><span class="nav-number">1.1.</span> <span class="nav-text">A.a MATLAB操作界面的组成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A-b-MATLAB%E7%9A%84%E6%90%9C%E7%B4%A2%E8%B7%AF%E5%BE%84"><span class="nav-number">1.2.</span> <span class="nav-text">A.b MATLAB的搜索路径</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#B-MATLAB%E6%95%B0%E5%80%BC%E6%95%B0%E6%8D%AE"><span class="nav-number">2.</span> <span class="nav-text">B MATLAB数值数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#B-a-%E6%95%B0%E5%80%BC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%88%86%E7%B1%BB-class"><span class="nav-number">2.1.</span> <span class="nav-text">B.a 数值数据类型的分类(class)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-b-%E6%95%B0%E5%80%BC%E6%95%B0%E6%8D%AE%E7%9A%84%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F-format"><span class="nav-number">2.2.</span> <span class="nav-text">B.b 数值数据的输出格式(format)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-c-%E5%B8%B8%E7%94%A8%E6%95%B0%E5%AD%A6%E5%87%BD%E6%95%B0"><span class="nav-number">2.3.</span> <span class="nav-text">B.c 常用数学函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#B-c-a-%E5%87%BD%E6%95%B0%E7%9A%84%E8%B0%83%E7%94%A8%E6%A0%BC%E5%BC%8F"><span class="nav-number">2.3.1.</span> <span class="nav-text">B.c.a 函数的调用格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-c-b-%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E7%9A%84%E5%BA%94%E7%94%A8-sin-sind-abs-%E5%8F%96%E6%95%B4"><span class="nav-number">2.3.2.</span> <span class="nav-text">B.c.b 常用函数的应用(sin,sind;abs;取整)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-%E5%8F%98%E9%87%8F%E5%8F%8A%E5%85%B6%E6%93%8D%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">C 变量及其操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#C-a-%E5%8F%98%E9%87%8F%E4%B8%8E%E8%B5%8B%E5%80%BC%E8%AF%AD%E5%8F%A5"><span class="nav-number">3.1.</span> <span class="nav-text">C.a 变量与赋值语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-b-%E9%A2%84%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F"><span class="nav-number">3.2.</span> <span class="nav-text">C.b 预定义变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-c-%E5%8F%98%E9%87%8F%E7%9A%84%E7%AE%A1%E7%90%86"><span class="nav-number">3.3.</span> <span class="nav-text">C.c 变量的管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C-c-a-%E5%8F%98%E9%87%8F%E7%9A%84%E5%88%A0%E9%99%A4%E5%92%8C%E4%BF%AE%E6%94%B9%EF%BC%88who-whos%EF%BC%89"><span class="nav-number">3.3.1.</span> <span class="nav-text">C.c.a 变量的删除和修改（who,whos）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-c-b-%E5%86%85%E5%AD%98%E5%8F%98%E9%87%8F%E6%96%87%E4%BB%B6-save-load"><span class="nav-number">3.3.2.</span> <span class="nav-text">C.c.b 内存变量文件(save,load)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#D-MATLAB%E7%9F%A9%E9%98%B5%E8%A1%A8%E7%A4%BA"><span class="nav-number">4.</span> <span class="nav-text">D MATLAB矩阵表示</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#D-a-%E7%9F%A9%E9%98%B5%E7%9A%84%E5%BB%BA%E7%AB%8B"><span class="nav-number">4.1.</span> <span class="nav-text">D.a 矩阵的建立</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#D-b-%E5%86%92%E5%8F%B7%E8%A1%A8%E8%BE%BE%E5%BC%8F-linspace"><span class="nav-number">4.2.</span> <span class="nav-text">D.b 冒号表达式(linspace)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#D-c%E7%BB%93%E6%9E%84%E7%9F%A9%E9%98%B5%E5%92%8C%E5%8D%95%E5%85%83%E7%9F%A9%E9%98%B5"><span class="nav-number">4.3.</span> <span class="nav-text">D.c结构矩阵和单元矩阵</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#D-c-a-%E7%BB%93%E6%9E%84%E7%9F%A9%E9%98%B5%EF%BC%9A"><span class="nav-number">4.3.1.</span> <span class="nav-text">D.c.a 结构矩阵：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D-c-b-%E5%8D%95%E5%85%83%E7%9F%A9%E9%98%B5"><span class="nav-number">4.3.2.</span> <span class="nav-text">D.c.b 单元矩阵</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#E-%E7%9F%A9%E9%98%B5%E5%85%83%E7%B4%A0%E7%9A%84%E5%BC%95%E7%94%A8"><span class="nav-number">5.</span> <span class="nav-text">E 矩阵元素的引用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#E-a-%E7%9F%A9%E9%98%B5%E5%85%83%E7%B4%A0%E7%9A%84%E5%BC%95%E7%94%A8%E6%96%B9%E5%BC%8F-sub2ind-ind2sub"><span class="nav-number">5.1.</span> <span class="nav-text">E.a 矩阵元素的引用方式(sub2ind,ind2sub)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#E-b-%E5%88%A9%E7%94%A8%E5%86%92%E5%8F%B7%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%8E%B7%E5%BE%97%E5%AD%90%E7%9F%A9%E9%98%B5-end"><span class="nav-number">5.2.</span> <span class="nav-text">E.b 利用冒号表达式获得子矩阵(end)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#E-c%E5%88%A9%E7%94%A8%E7%A9%BA%E7%9F%A9%E9%98%B5%E5%88%A0%E9%99%A4%E7%9F%A9%E9%98%B5%E7%9A%84%E5%85%83%E7%B4%A0"><span class="nav-number">5.3.</span> <span class="nav-text">E.c利用空矩阵删除矩阵的元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#E-d%E6%94%B9%E5%8F%98%E7%9F%A9%E9%98%B5%E7%9A%84%E5%BD%A2%E7%8A%B6-reshape"><span class="nav-number">5.4.</span> <span class="nav-text">E.d改变矩阵的形状(reshape)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#F-MATLAB%E5%9F%BA%E6%9C%AC%E8%BF%90%E7%AE%97"><span class="nav-number">6.</span> <span class="nav-text">F MATLAB基本运算</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#F-a%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97"><span class="nav-number">6.1.</span> <span class="nav-text">F.a算术运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#F-b-%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97"><span class="nav-number">6.2.</span> <span class="nav-text">F.b 关系运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#F-c-%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97-amp"><span class="nav-number">6.3.</span> <span class="nav-text">F.c 逻辑运算(&amp;,|,~)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#G-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86"><span class="nav-number">7.</span> <span class="nav-text">G 字符串处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#G-a-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E8%A1%A8%E7%A4%BA"><span class="nav-number">7.1.</span> <span class="nav-text">G.a 字符串的表示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#G-b%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%93%8D%E4%BD%9C-strcmp-findstr-strrep"><span class="nav-number">7.2.</span> <span class="nav-text">G.b字符串的操作(strcmp;findstr;strrep)</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="vi0let"
+      src="/images/5.jpg">
+  <p class="site-author-name" itemprop="name">vi0let</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://lucky-xiaobai.github.io/2022/06/27/Matlab%E4%B8%AD%E5%8D%97%E5%A4%A7%E5%AD%A6%E7%AC%94%E8%AE%B0/%EF%BC%8801%EF%BC%89%E3%80%90Matlab%E3%80%91Matlab%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/5.jpg">
+      <meta itemprop="name" content="vi0let">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vi0let's blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="(01)Matlab基础知识 | vi0let's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          (01)Matlab基础知识
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-06-27 10:34:58 / 修改时间：10:56:40" itemprop="dateCreated datePublished" datetime="2022-06-27T10:34:58+08:00">2022-06-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/matlab/" itemprop="url" rel="index"><span itemprop="name">matlab</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="A-MATLAB系统环境"><a href="#A-MATLAB系统环境" class="headerlink" title="A MATLAB系统环境"></a>A MATLAB系统环境</h1><h2 id="A-a-MATLAB操作界面的组成"><a href="#A-a-MATLAB操作界面的组成" class="headerlink" title="A.a MATLAB操作界面的组成"></a>A.a MATLAB操作界面的组成</h2><p>1 Matlab主窗口<br><img src="https://img-blog.csdnimg.cn/20200225164148733.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<ul>
+<li>功能区：提供三个选项卡（主页，绘图，应用程序），各自有不同的工具可供使用。</li>
+<li>快速访问工具栏：包含一些常用按钮</li>
+<li>当前文件夹工具栏：用于实现当前文件夹的操作</li>
+</ul>
+<hr>
+<span id="more"></span>
+
+<p>2 命令行窗口<br><img src="https://img-blog.csdnimg.cn/20200225164656339.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>命令行窗口用于输入命令并显示命令的执行结果。在命令提示符$&gt;&gt;$后输入命令并按下回车键，Matlab就会解释执行输入的命令并显示结果<br><img src="https://img-blog.csdnimg.cn/20200225165313252.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<p>3 当前文件夹窗口<br><img src="https://img-blog.csdnimg.cn/20200225165444784.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200225165545892.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>注意：一定要先建立文件夹，再将文件夹设为当前文件夹。<br><img src="https://img-blog.csdnimg.cn/20200225165715889.png" alt="在这里插入图片描述"></p>
+<hr>
+<p>4 工作区窗口<br>是Matlab用于存储各种变量和结果的空间，可用于变量的显示和操作。<br><img src="https://img-blog.csdnimg.cn/20200225165949976.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>在工作区以表格形式显示变量a与x的名称，取值等信息。在工作区还可以对变量进行保存、编辑、删除等操作。</p>
+<hr>
+<h2 id="A-b-MATLAB的搜索路径"><a href="#A-b-MATLAB的搜索路径" class="headerlink" title="A.b MATLAB的搜索路径"></a>A.b MATLAB的搜索路径</h2><p>1 用户在命令行窗口输入一条命令后，MATLAB将按照一定顺序依次寻找命令对象。<br>顺序（当以下都同名时）：<br><img src="https://img-blog.csdnimg.cn/20200225170539698.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>如（clear清楚工作区的全部变量）：<br><img src="https://img-blog.csdnimg.cn/20200225170658693.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>所以定义变量名时要避免与文件名和函数名重复。</p>
+<hr>
+<p>2 设置文件搜索路径<br><img src="https://img-blog.csdnimg.cn/20200225171150978.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>在命令行输入文件名后，MATLAB是在当前文件夹与搜索路径文件夹中寻找这个文件并执行文件内容的，所以要执行的文件必须放在这两类文件夹中。<br>如果两个文件夹种有同名的M文件，在命令行输入这个文件名执行顺序：当前文件夹&gt;搜索路径文件夹</p>
+<hr>
+<h1 id="B-MATLAB数值数据"><a href="#B-MATLAB数值数据" class="headerlink" title="B MATLAB数值数据"></a>B MATLAB数值数据</h1><h2 id="B-a-数值数据类型的分类-class"><a href="#B-a-数值数据类型的分类-class" class="headerlink" title="B.a 数值数据类型的分类(class)"></a>B.a 数值数据类型的分类(class)</h2><p>1 整形：<br><img src="https://img-blog.csdnimg.cn/20200225173043805.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200225173117852.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<p>2 浮点型<br><img src="https://img-blog.csdnimg.cn/20200225173216509.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>class函数可以得到参数的数据类型。<br><img src="https://img-blog.csdnimg.cn/20200225173308488.png" alt="在这里插入图片描述"></p>
+<hr>
+<p>3 复数型<br><img src="https://img-blog.csdnimg.cn/20200225173359365.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">real() %求复数的实部</span><br><span class="line">imag() %求复数的虚部</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="B-b-数值数据的输出格式-format"><a href="#B-b-数值数据的输出格式-format" class="headerlink" title="B.b 数值数据的输出格式(format)"></a>B.b 数值数据的输出格式(format)</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">format 格式符  % 设置数据的输出格式</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20200225173742228.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>不同的格式符输出不同的数据格式。<br>注意：format命令只是影响数据输出的格式，而不影响数据的计算和存储。</p>
+<hr>
+<h2 id="B-c-常用数学函数"><a href="#B-c-常用数学函数" class="headerlink" title="B.c 常用数学函数"></a>B.c 常用数学函数</h2><h3 id="B-c-a-函数的调用格式"><a href="#B-c-a-函数的调用格式" class="headerlink" title="B.c.a 函数的调用格式"></a>B.c.a 函数的调用格式</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">函数名（函数自变量的值）</span><br></pre></td></tr></table></figure>
+<p>函数的自变量规定为矩阵变量（标量本身是矩阵的一种特例）。<br><strong>函数在运算时是将函数逐项作用于矩阵的每个元素上</strong>，所以最后运算的结果就是一个与自变量同型的矩阵。<br><img src="https://img-blog.csdnimg.cn/20200225174501225.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<h3 id="B-c-b-常用函数的应用-sin-sind-abs-取整"><a href="#B-c-b-常用函数的应用-sin-sind-abs-取整" class="headerlink" title="B.c.b 常用函数的应用(sin,sind;abs;取整)"></a>B.c.b 常用函数的应用(sin,sind;abs;取整)</h3><p><img src="https://img-blog.csdnimg.cn/20200225174641778.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200225174828815.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200225175107125.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rem(m,n)   %求m/n的余数</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20200225175522721.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">isprime(n) <span class="comment"># 判断n是否是素数，是返回1，否返回0.</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20200225180657183.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<h1 id="C-变量及其操作"><a href="#C-变量及其操作" class="headerlink" title="C 变量及其操作"></a>C 变量及其操作</h1><p>计算机处理的数据都是存放在内存单元中的，而每一个内存单元都有一个唯一的地址，程序就是通过这个地址来访问对应内存单元的。<br>在如Matlab这种高级语言中，只需要给每个内存单元取一个名字，然后通过这个名字就能访问每个内存单元了。</p>
+<h2 id="C-a-变量与赋值语句"><a href="#C-a-变量与赋值语句" class="headerlink" title="C.a 变量与赋值语句"></a>C.a 变量与赋值语句</h2><ul>
+<li>变量本质上讲是内存单元的一个抽象</li>
+<li>在Matlab中，变量名是以字母开头，后接字母、数字或下划线的字母序列，最多63个字符。<br><img src="https://img-blog.csdnimg.cn/20200225185102476.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+<li>变量名区分大小写</li>
+<li>标准函数名以及命令名必须用小写字母</li>
+</ul>
+<hr>
+<p>赋值语句两种格式</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">变量=表达式        % 变量结果会在命令行中显示出来</span><br><span class="line">变量=表达式；	  % 变量结果不会在命令行中显示出来</span><br></pre></td></tr></table></figure>
+<p>例子：<br><img src="https://img-blog.csdnimg.cn/20200225185751144.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<h2 id="C-b-预定义变量"><a href="#C-b-预定义变量" class="headerlink" title="C.b 预定义变量"></a>C.b 预定义变量</h2><p><img src="https://img-blog.csdnimg.cn/20200225190113487.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<h2 id="C-c-变量的管理"><a href="#C-c-变量的管理" class="headerlink" title="C.c 变量的管理"></a>C.c 变量的管理</h2><h3 id="C-c-a-变量的删除和修改（who-whos）"><a href="#C-c-a-变量的删除和修改（who-whos）" class="headerlink" title="C.c.a 变量的删除和修改（who,whos）"></a>C.c.a 变量的删除和修改（who,whos）</h3><p>在工作区选择变量右击即可进行删除和修改。<br><img src="https://img-blog.csdnimg.cn/20200225190331526.png" alt="在这里插入图片描述"><br>who命令和whos命令：<br>who命令只显示已存在变量的名称。而whos显示信息更多。<br><img src="https://img-blog.csdnimg.cn/20200225190517955.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<h3 id="C-c-b-内存变量文件-save-load"><a href="#C-c-b-内存变量文件-save-load" class="headerlink" title="C.c.b 内存变量文件(save,load)"></a>C.c.b 内存变量文件(save,load)</h3><p>用于保存Matlab工作区变量的文件叫做内存变量文件，其扩展名为.mat，也叫MAT文件，是一种标准的二进制格式文件。<br>save命令：创建内存变量文件<br>load命令：载入内存变量文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">save mydata a x   % 将a x保存在mydata.mat文件中</span><br><span class="line">load mydata       % 载入mydata.mat中的变量</span><br></pre></td></tr></table></figure>
+
+<h1 id="D-MATLAB矩阵表示"><a href="#D-MATLAB矩阵表示" class="headerlink" title="D MATLAB矩阵表示"></a>D MATLAB矩阵表示</h1><h2 id="D-a-矩阵的建立"><a href="#D-a-矩阵的建立" class="headerlink" title="D.a 矩阵的建立"></a>D.a 矩阵的建立</h2><p><img src="https://img-blog.csdnimg.cn/20200225192208567.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200225192454699.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<h2 id="D-b-冒号表达式-linspace"><a href="#D-b-冒号表达式-linspace" class="headerlink" title="D.b 冒号表达式(linspace)"></a>D.b 冒号表达式(linspace)</h2><p>1 用冒号产生行向量t：<br><img src="https://img-blog.csdnimg.cn/2020022519264856.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<p>2 用linspace函数产生行向量x:<br><img src="https://img-blog.csdnimg.cn/20200225192806840.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="D-c结构矩阵和单元矩阵"><a href="#D-c结构矩阵和单元矩阵" class="headerlink" title="D.c结构矩阵和单元矩阵"></a>D.c结构矩阵和单元矩阵</h2><h3 id="D-c-a-结构矩阵："><a href="#D-c-a-结构矩阵：" class="headerlink" title="D.c.a 结构矩阵："></a>D.c.a 结构矩阵：</h3><p>   在实际应用中，经常会遇到不同类型的数据项组成的实体，例如一个学生的数据实体就包括了年龄，姓名，学号，这些数据是相互联系的。结构数据类型就可以把这些数据类型不同但逻辑上相关的数据组成一个有机的整体。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">结构矩阵元素.成员名=表达式</span><br></pre></td></tr></table></figure>
+
+<p>   例如： 学生这个结构数据包含三个成员，分别是年龄，姓名，学号，由结构数据构成的矩阵就是结构矩阵。结构矩阵里的每个元素都是结构数据类型的。即结构矩阵相当于一个班级，结构矩阵里的元素就是这个班级的学生，每个学生有年龄，姓名，学号三个信息（成员）。</p>
+<p> <img src="https://img-blog.csdnimg.cn/20200225195123796.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="D-c-b-单元矩阵"><a href="#D-c-b-单元矩阵" class="headerlink" title="D.c.b 单元矩阵"></a>D.c.b 单元矩阵</h3><p>单元数据类型，也是把不同的数据放在一个变量中，但与结构矩阵所不同的是，结构矩阵的各个元素下还有成员，每个成员都有自己的名字，而单元矩阵的各个元素就是不同类型的数据，每个元素直接由不同类型的数据组成。<br><img src="https://img-blog.csdnimg.cn/20200225200109661.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="E-矩阵元素的引用"><a href="#E-矩阵元素的引用" class="headerlink" title="E 矩阵元素的引用"></a>E 矩阵元素的引用</h1><h2 id="E-a-矩阵元素的引用方式-sub2ind-ind2sub"><a href="#E-a-矩阵元素的引用方式-sub2ind-ind2sub" class="headerlink" title="E.a 矩阵元素的引用方式(sub2ind,ind2sub)"></a>E.a 矩阵元素的引用方式(sub2ind,ind2sub)</h2><p><img src="https://img-blog.csdnimg.cn/20200225201212298.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/202002252008579.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>如果给出的行下标和列下标大于矩阵的行数和列数，Matlab将自动扩展原来的矩阵，并将扩展后没有赋值的元素赋值为0。<br><img src="https://img-blog.csdnimg.cn/20200225200943309.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/20200225201114187.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200225201258314.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/20200225202516110.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200225203322435.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<h2 id="E-b-利用冒号表达式获得子矩阵-end"><a href="#E-b-利用冒号表达式获得子矩阵-end" class="headerlink" title="E.b 利用冒号表达式获得子矩阵(end)"></a>E.b 利用冒号表达式获得子矩阵(end)</h2><p>子矩阵是指由矩阵中一部分元素构成的矩阵。<br><img src="https://img-blog.csdnimg.cn/20200225203609383.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>例子:<br><img src="https://img-blog.csdnimg.cn/2020022520395972.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200225204124604.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<h2 id="E-c利用空矩阵删除矩阵的元素"><a href="#E-c利用空矩阵删除矩阵的元素" class="headerlink" title="E.c利用空矩阵删除矩阵的元素"></a>E.c利用空矩阵删除矩阵的元素</h2><p><img src="https://img-blog.csdnimg.cn/20200225204212560.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200225204254928.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<h2 id="E-d改变矩阵的形状-reshape"><a href="#E-d改变矩阵的形状-reshape" class="headerlink" title="E.d改变矩阵的形状(reshape)"></a>E.d改变矩阵的形状(reshape)</h2><p>在矩阵<strong>总元素保持不变</strong>的前提下，将矩阵A重新排成$m*n$的二维矩阵。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reshape(A,m,n)</span><br></pre></td></tr></table></figure>
+<p>注意：reshape函数只是改变原矩阵的行数和列数，但并不改变原矩阵元素个数及其存储顺序。<br><img src="https://img-blog.csdnimg.cn/20200225204803537.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/20200225204859210.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A(:)等价于reshape(A,6,1)</span><br></pre></td></tr></table></figure>
+
+<h1 id="F-MATLAB基本运算"><a href="#F-MATLAB基本运算" class="headerlink" title="F MATLAB基本运算"></a>F MATLAB基本运算</h1><h2 id="F-a算术运算"><a href="#F-a算术运算" class="headerlink" title="F.a算术运算"></a>F.a算术运算</h2><p><img src="https://img-blog.csdnimg.cn/20200225205324727.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20200225205433194.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</blockquote>
+<blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20200225205539131.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</blockquote>
+<blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20200225205645610.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200225205811959.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</blockquote>
+<blockquote>
+<p>A^2&#x3D;A*A<img src="https://img-blog.csdnimg.cn/20200225205913897.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</blockquote>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/2020022521004121.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>例子：<br><img src="https://img-blog.csdnimg.cn/20200225210215622.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>例题：<br><img src="https://img-blog.csdnimg.cn/20200225210349514.png" alt="在这里插入图片描述"></p>
+<hr>
+<h2 id="F-b-关系运算"><a href="#F-b-关系运算" class="headerlink" title="F.b 关系运算"></a>F.b 关系运算</h2><p><img src="https://img-blog.csdnimg.cn/20200225210731220.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>例题：<br><img src="https://img-blog.csdnimg.cn/20200225210834666.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<h2 id="F-c-逻辑运算-amp"><a href="#F-c-逻辑运算-amp" class="headerlink" title="F.c 逻辑运算(&amp;,|,~)"></a>F.c 逻辑运算(&amp;,|,~)</h2><p><img src="https://img-blog.csdnimg.cn/20200225210947381.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>例子：<br><img src="https://img-blog.csdnimg.cn/20200225211054779.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200225211309602.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/20200225211400528.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>例题：<br><img src="https://img-blog.csdnimg.cn/20200225211611641.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<h1 id="G-字符串处理"><a href="#G-字符串处理" class="headerlink" title="G 字符串处理"></a>G 字符串处理</h1><h2 id="G-a-字符串的表示"><a href="#G-a-字符串的表示" class="headerlink" title="G.a 字符串的表示"></a>G.a 字符串的表示</h2><p><img src="https://img-blog.csdnimg.cn/20200225213621487.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20200225213714464.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</blockquote>
+<blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20200225213839358.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>要求各行字符数要相等（列数相同）。如果不等，就要用空格调节各行长度，使之数目相等。</p>
+</blockquote>
+<blockquote>
+<p>例题：<br><img src="https://img-blog.csdnimg.cn/20200225214246795.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</blockquote>
+<h2 id="G-b字符串的操作-strcmp-findstr-strrep"><a href="#G-b字符串的操作-strcmp-findstr-strrep" class="headerlink" title="G.b字符串的操作(strcmp;findstr;strrep)"></a>G.b字符串的操作(strcmp;findstr;strrep)</h2><p>将字符串内容作为MATLAB的命令执行<br><img src="https://img-blog.csdnimg.cn/2020022521453133.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/20200225214652808.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/20200225215346623.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/20200225215325522.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/20200225215655578.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<blockquote>
+<p>图片来源（一个讲的不错的MATLAB课程）：<br><a target="_blank" rel="noopener" href="https://www.icourse163.org/search.htm?search=%E4%B8%AD%E5%8D%97%E5%A4%A7%E5%AD%A6%20Matlab#/">https://www.icourse163.org/search.htm?search=%E4%B8%AD%E5%8D%97%E5%A4%A7%E5%AD%A6%20Matlab#/</a></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>vi0let
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://lucky-xiaobai.github.io/2022/06/27/Matlab%E4%B8%AD%E5%8D%97%E5%A4%A7%E5%AD%A6%E7%AC%94%E8%AE%B0/%EF%BC%8801%EF%BC%89%E3%80%90Matlab%E3%80%91Matlab%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="(01)Matlab基础知识">https://lucky-xiaobai.github.io/2022/06/27/Matlab中南大学笔记/（01）【Matlab】Matlab基础知识/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/matlab/" rel="tag"># matlab</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/06/27/Matlab%E4%B8%AD%E5%8D%97%E5%A4%A7%E5%AD%A6%E7%AC%94%E8%AE%B0/%EF%BC%8802%EF%BC%89%E3%80%90Matlab%E3%80%91Matlab%E7%9F%A9%E9%98%B5%E5%A4%84%E7%90%86/" rel="prev" title="(02)Matlab矩阵处理">
+                  <i class="fa fa-chevron-left"></i> (02)Matlab矩阵处理
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/06/27/Matlab%E4%B8%AD%E5%8D%97%E5%A4%A7%E5%AD%A6%E7%AC%94%E8%AE%B0/%EF%BC%8803%EF%BC%89%E3%80%90matlab%E3%80%91Matlab%E7%A8%8B%E5%BA%8F%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6(2)%E5%87%BD%E6%95%B0/" rel="next" title="(03)Matlab程序流程控制(2)函数">
+                  (03)Matlab程序流程控制(2)函数 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">vi0let</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共14.9k字</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
