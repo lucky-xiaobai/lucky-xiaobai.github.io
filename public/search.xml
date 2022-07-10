@@ -1,6 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>(02)Matlab矩阵处理</title>
+    <url>/2022/06/27/Matlab%E4%B8%AD%E5%8D%97%E5%A4%A7%E5%AD%A6%E7%AC%94%E8%AE%B0/%EF%BC%8802%EF%BC%89%E3%80%90Matlab%E3%80%91Matlab%E7%9F%A9%E9%98%B5%E5%A4%84%E7%90%86/</url>
+    <content><![CDATA[<h1 id="A-特殊矩阵"><a href="#A-特殊矩阵" class="headerlink" title="A 特殊矩阵"></a>A 特殊矩阵</h1><h2 id="A-a-通用性矩阵"><a href="#A-a-通用性矩阵" class="headerlink" title="A.a 通用性矩阵"></a>A.a 通用性矩阵</h2><p><img src="https://img-blog.csdnimg.cn/2020022522211851.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>以上函数调用格式相同，以zeros为例：<br><img src="https://img-blog.csdnimg.cn/20200225222235452.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>例题：<br><img src="https://img-blog.csdnimg.cn/2020022522311874.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<span id="more"></span>
+
+<h2 id="A-b-用于专门学科的特殊矩阵"><a href="#A-b-用于专门学科的特殊矩阵" class="headerlink" title="A.b 用于专门学科的特殊矩阵"></a>A.b 用于专门学科的特殊矩阵</h2><p><img src="https://img-blog.csdnimg.cn/20200225223516356.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>例题：<br><img src="https://img-blog.csdnimg.cn/20200225223615715.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/20200225223730821.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200225223818877.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/20200225223910101.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200225223948678.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>rat:有理数</p>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/20200225224117756.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200225224219403.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/20200225224445440.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>例子：<br><img src="https://img-blog.csdnimg.cn/20200225224515349.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<h1 id="B-矩阵变换"><a href="#B-矩阵变换" class="headerlink" title="B 矩阵变换"></a>B 矩阵变换</h1><h2 id="B-a-对角阵"><a href="#B-a-对角阵" class="headerlink" title="B.a 对角阵"></a>B.a 对角阵</h2><p><img src="https://img-blog.csdnimg.cn/20200225224850695.png" alt="在这里插入图片描述"></p>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/20200225225014735.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/2020022522511771.png" alt="在这里插入图片描述"><br>例题：<br><img src="https://img-blog.csdnimg.cn/20200225225320362.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<h2 id="B-b-三角阵"><a href="#B-b-三角阵" class="headerlink" title="B.b 三角阵"></a>B.b 三角阵</h2><p><img src="https://img-blog.csdnimg.cn/20200225225517654.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/20200225225548956.png" alt="在这里插入图片描述"></p>
+<hr>
+<h2 id="B-c-矩阵的转置"><a href="#B-c-矩阵的转置" class="headerlink" title="B.c 矩阵的转置"></a>B.c 矩阵的转置</h2><p><img src="https://img-blog.csdnimg.cn/20200225225648324.png" alt="在这里插入图片描述"><br>例子：<br><img src="https://img-blog.csdnimg.cn/20200225225721400.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<h2 id="B-d-矩阵的旋转"><a href="#B-d-矩阵的旋转" class="headerlink" title="B.d 矩阵的旋转"></a>B.d 矩阵的旋转</h2><p><img src="https://img-blog.csdnimg.cn/20200225225828259.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<h2 id="B-e-矩阵的翻转"><a href="#B-e-矩阵的翻转" class="headerlink" title="B.e 矩阵的翻转"></a>B.e 矩阵的翻转</h2><p><img src="https://img-blog.csdnimg.cn/20200225225949126.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020022523065439.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<h2 id="B-f-矩阵的求逆"><a href="#B-f-矩阵的求逆" class="headerlink" title="B.f 矩阵的求逆"></a>B.f 矩阵的求逆</h2><p><img src="https://img-blog.csdnimg.cn/20200225230905195.png" alt="在这里插入图片描述"><br>例题：<br><img src="https://img-blog.csdnimg.cn/20200225231016428.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="C-矩阵求值"><a href="#C-矩阵求值" class="headerlink" title="C 矩阵求值"></a>C 矩阵求值</h1><h2 id="C-a-矩阵的行列式"><a href="#C-a-矩阵的行列式" class="headerlink" title="C.a 矩阵的行列式"></a>C.a 矩阵的行列式</h2><p><img src="https://img-blog.csdnimg.cn/20200225231300980.png" alt="在这里插入图片描述"><br>例题：<br><img src="https://img-blog.csdnimg.cn/20200225231438778.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<h2 id="C-b-矩阵的秩"><a href="#C-b-矩阵的秩" class="headerlink" title="C.b 矩阵的秩"></a>C.b 矩阵的秩</h2><p><img src="https://img-blog.csdnimg.cn/2020022523151992.png" alt="在这里插入图片描述"><br>例题：<br><img src="https://img-blog.csdnimg.cn/20200225231738565.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="C-c-矩阵的迹"><a href="#C-c-矩阵的迹" class="headerlink" title="C.c 矩阵的迹"></a>C.c 矩阵的迹</h2><p><img src="https://img-blog.csdnimg.cn/20200225231809926.png" alt="在这里插入图片描述"><br>例子：<br><img src="https://img-blog.csdnimg.cn/20200225231839886.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<h2 id="C-d-向量和矩阵的范数"><a href="#C-d-向量和矩阵的范数" class="headerlink" title="C.d 向量和矩阵的范数"></a>C.d 向量和矩阵的范数</h2><p>矩阵或向量的范数用来度量矩阵或向量在某种意义下的长度。<br><img src="https://img-blog.csdnimg.cn/20200225232020998.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200225232059755.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200225232210345.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200225232314833.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<h2 id="C-e-矩阵的条件数"><a href="#C-e-矩阵的条件数" class="headerlink" title="C.e 矩阵的条件数"></a>C.e 矩阵的条件数</h2><p><img src="https://img-blog.csdnimg.cn/20200225232406378.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200225232453185.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>例题：<br><img src="https://img-blog.csdnimg.cn/20200225232536340.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<h1 id="D-矩阵的特征值与特征向量"><a href="#D-矩阵的特征值与特征向量" class="headerlink" title="D 矩阵的特征值与特征向量"></a>D 矩阵的特征值与特征向量</h1><h2 id="D-a-矩阵特征值的数学定义"><a href="#D-a-矩阵特征值的数学定义" class="headerlink" title="D.a 矩阵特征值的数学定义"></a>D.a 矩阵特征值的数学定义</h2><p><img src="https://img-blog.csdnimg.cn/20200226010535257.png" alt="在这里插入图片描述"></p>
+<hr>
+<h2 id="D-b-求矩阵的特征值和特征向量"><a href="#D-b-求矩阵的特征值和特征向量" class="headerlink" title="D.b 求矩阵的特征值和特征向量"></a>D.b 求矩阵的特征值和特征向量</h2><p><img src="https://img-blog.csdnimg.cn/20200226010633561.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>例子：A*X(:,1)&#x3D;D(1)*X(:,1)<br><img src="https://img-blog.csdnimg.cn/20200226010826919.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>例题：<br><img src="https://img-blog.csdnimg.cn/20200226011313434.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>X3对角为X1和X2，</p>
+<hr>
+<h2 id="D-c-特征值的几何意义"><a href="#D-c-特征值的几何意义" class="headerlink" title="D.c 特征值的几何意义"></a>D.c 特征值的几何意义</h2><p><img src="https://img-blog.csdnimg.cn/20200226012010606.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>y1和y2分别是x1和x2经过A矩阵变换得到的。把$\lambda_1、\lambda_2$当作伸缩因子，y1和y2是x1和x2经过$\lambda_1、\lambda_2$伸缩以后的结果，如图所示。<br>更进一步地，连续取单位向量x，让它大小保持唯一，那么Ax就将圆弧拉伸，变成椭圆弧。<br><img src="https://img-blog.csdnimg.cn/20200226012651958.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200226012854481.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200226013028960.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<h1 id="E-稀疏矩阵"><a href="#E-稀疏矩阵" class="headerlink" title="E 稀疏矩阵"></a>E 稀疏矩阵</h1><p>稀疏矩阵指的是零元素个数远远多于非零元素个数的矩阵，如果将大量的零元素也存储起来，必将导致存储空间的浪费。为此，MATLAB为稀疏矩阵提供特殊的存储方式。</p>
+<h2 id="E-a矩阵的存储方式"><a href="#E-a矩阵的存储方式" class="headerlink" title="E.a矩阵的存储方式"></a>E.a矩阵的存储方式</h2><p><img src="https://img-blog.csdnimg.cn/20200226022859678.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>例子：<br><img src="https://img-blog.csdnimg.cn/20200226023031222.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<h2 id="E-b-稀疏存储方式的产生"><a href="#E-b-稀疏存储方式的产生" class="headerlink" title="E.b 稀疏存储方式的产生"></a>E.b 稀疏存储方式的产生</h2><p><img src="https://img-blog.csdnimg.cn/20200226023122506.png" alt="在这里插入图片描述"><br>例子：<br><img src="https://img-blog.csdnimg.cn/20200226023304423.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/2020022602350310.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>例子：<br><img src="https://img-blog.csdnimg.cn/2020022602353898.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/2020022602383560.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>用A的一行元素表示一个稀疏矩阵的元素，相当于A每一行的每个元素是相应的稀疏矩阵元素的一个信息。这些信息组合经过<code>spconvert</code>就可以得到相应的稀疏矩阵元素。<br>例子：<br>A描述的稀疏矩阵：[2，2，1：第二行第二列的1；2，1，-1：第二行第一列的-1；2，4，3：第二行第四列的3；其他为0。]经过<code>spconvert</code>实现A描述的稀疏矩阵。<br><img src="https://img-blog.csdnimg.cn/20200226024306977.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/20200226024731653.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200226024859640.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>例子：<br><img src="https://img-blog.csdnimg.cn/20200226025105454.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200226030758808.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>A的稀疏存储：<br><img src="https://img-blog.csdnimg.cn/20200226025205518.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/20200226025314929.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<h2 id="E-c-稀疏矩阵应用举例"><a href="#E-c-稀疏矩阵应用举例" class="headerlink" title="E.c 稀疏矩阵应用举例"></a>E.c 稀疏矩阵应用举例</h2><p><img src="https://img-blog.csdnimg.cn/20200226025405639.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">clc;clear</span><br><span class="line">kf1= [1;1;2;1;0];     % 主对角线以下第一条元素</span><br><span class="line">k0 = [2;4;6;6;1];     % 主对角线元素</span><br><span class="line">k1 = [0;3;1;4;2];     % 主对角线以上第一条元素</span><br><span class="line">B = [kf1,k0,k1];</span><br><span class="line">d = [-1;0;1];</span><br><span class="line">A = spdiags(B,d,5,5); % 产生稀疏存储的稀疏矩阵</span><br><span class="line">f = [0;3;2;1;5];</span><br><span class="line">x = A\f               %求出解</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20200226031806642.png" alt="在这里插入图片描述"></p>
+<hr>
+<blockquote>
+<p>图片来源：<br><a href="https://www.icourse163.org/search.htm?search=%E4%B8%AD%E5%8D%97%E5%A4%A7%E5%AD%A6%20Matlab#/">https://www.icourse163.org/search.htm?search=%E4%B8%AD%E5%8D%97%E5%A4%A7%E5%AD%A6%20Matlab#/</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>matlab</category>
+      </categories>
+      <tags>
+        <tag>matlab</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(01)Matlab基础知识</title>
     <url>/2022/06/27/Matlab%E4%B8%AD%E5%8D%97%E5%A4%A7%E5%AD%A6%E7%AC%94%E8%AE%B0/%EF%BC%8801%EF%BC%89%E3%80%90Matlab%E3%80%91Matlab%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
     <content><![CDATA[<h1 id="A-MATLAB系统环境"><a href="#A-MATLAB系统环境" class="headerlink" title="A MATLAB系统环境"></a>A MATLAB系统环境</h1><h2 id="A-a-MATLAB操作界面的组成"><a href="#A-a-MATLAB操作界面的组成" class="headerlink" title="A.a MATLAB操作界面的组成"></a>A.a MATLAB操作界面的组成</h2><p>1 Matlab主窗口<br><img src="https://img-blog.csdnimg.cn/20200225164148733.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
@@ -132,84 +210,6 @@
 <hr>
 <blockquote>
 <p>图片来源（一个讲的不错的MATLAB课程）：<br><a href="https://www.icourse163.org/search.htm?search=%E4%B8%AD%E5%8D%97%E5%A4%A7%E5%AD%A6%20Matlab#/">https://www.icourse163.org/search.htm?search=%E4%B8%AD%E5%8D%97%E5%A4%A7%E5%AD%A6%20Matlab#/</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>matlab</category>
-      </categories>
-      <tags>
-        <tag>matlab</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(02)Matlab矩阵处理</title>
-    <url>/2022/06/27/Matlab%E4%B8%AD%E5%8D%97%E5%A4%A7%E5%AD%A6%E7%AC%94%E8%AE%B0/%EF%BC%8802%EF%BC%89%E3%80%90Matlab%E3%80%91Matlab%E7%9F%A9%E9%98%B5%E5%A4%84%E7%90%86/</url>
-    <content><![CDATA[<h1 id="A-特殊矩阵"><a href="#A-特殊矩阵" class="headerlink" title="A 特殊矩阵"></a>A 特殊矩阵</h1><h2 id="A-a-通用性矩阵"><a href="#A-a-通用性矩阵" class="headerlink" title="A.a 通用性矩阵"></a>A.a 通用性矩阵</h2><p><img src="https://img-blog.csdnimg.cn/2020022522211851.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>以上函数调用格式相同，以zeros为例：<br><img src="https://img-blog.csdnimg.cn/20200225222235452.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>例题：<br><img src="https://img-blog.csdnimg.cn/2020022522311874.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<hr>
-<span id="more"></span>
-
-<h2 id="A-b-用于专门学科的特殊矩阵"><a href="#A-b-用于专门学科的特殊矩阵" class="headerlink" title="A.b 用于专门学科的特殊矩阵"></a>A.b 用于专门学科的特殊矩阵</h2><p><img src="https://img-blog.csdnimg.cn/20200225223516356.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>例题：<br><img src="https://img-blog.csdnimg.cn/20200225223615715.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<hr>
-<p><img src="https://img-blog.csdnimg.cn/20200225223730821.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200225223818877.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<hr>
-<p><img src="https://img-blog.csdnimg.cn/20200225223910101.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200225223948678.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>rat:有理数</p>
-<hr>
-<p><img src="https://img-blog.csdnimg.cn/20200225224117756.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200225224219403.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<hr>
-<p><img src="https://img-blog.csdnimg.cn/20200225224445440.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>例子：<br><img src="https://img-blog.csdnimg.cn/20200225224515349.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<hr>
-<h1 id="B-矩阵变换"><a href="#B-矩阵变换" class="headerlink" title="B 矩阵变换"></a>B 矩阵变换</h1><h2 id="B-a-对角阵"><a href="#B-a-对角阵" class="headerlink" title="B.a 对角阵"></a>B.a 对角阵</h2><p><img src="https://img-blog.csdnimg.cn/20200225224850695.png" alt="在这里插入图片描述"></p>
-<hr>
-<p><img src="https://img-blog.csdnimg.cn/20200225225014735.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<hr>
-<p><img src="https://img-blog.csdnimg.cn/2020022522511771.png" alt="在这里插入图片描述"><br>例题：<br><img src="https://img-blog.csdnimg.cn/20200225225320362.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<hr>
-<h2 id="B-b-三角阵"><a href="#B-b-三角阵" class="headerlink" title="B.b 三角阵"></a>B.b 三角阵</h2><p><img src="https://img-blog.csdnimg.cn/20200225225517654.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<hr>
-<p><img src="https://img-blog.csdnimg.cn/20200225225548956.png" alt="在这里插入图片描述"></p>
-<hr>
-<h2 id="B-c-矩阵的转置"><a href="#B-c-矩阵的转置" class="headerlink" title="B.c 矩阵的转置"></a>B.c 矩阵的转置</h2><p><img src="https://img-blog.csdnimg.cn/20200225225648324.png" alt="在这里插入图片描述"><br>例子：<br><img src="https://img-blog.csdnimg.cn/20200225225721400.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<hr>
-<h2 id="B-d-矩阵的旋转"><a href="#B-d-矩阵的旋转" class="headerlink" title="B.d 矩阵的旋转"></a>B.d 矩阵的旋转</h2><p><img src="https://img-blog.csdnimg.cn/20200225225828259.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<hr>
-<h2 id="B-e-矩阵的翻转"><a href="#B-e-矩阵的翻转" class="headerlink" title="B.e 矩阵的翻转"></a>B.e 矩阵的翻转</h2><p><img src="https://img-blog.csdnimg.cn/20200225225949126.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020022523065439.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<hr>
-<h2 id="B-f-矩阵的求逆"><a href="#B-f-矩阵的求逆" class="headerlink" title="B.f 矩阵的求逆"></a>B.f 矩阵的求逆</h2><p><img src="https://img-blog.csdnimg.cn/20200225230905195.png" alt="在这里插入图片描述"><br>例题：<br><img src="https://img-blog.csdnimg.cn/20200225231016428.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h1 id="C-矩阵求值"><a href="#C-矩阵求值" class="headerlink" title="C 矩阵求值"></a>C 矩阵求值</h1><h2 id="C-a-矩阵的行列式"><a href="#C-a-矩阵的行列式" class="headerlink" title="C.a 矩阵的行列式"></a>C.a 矩阵的行列式</h2><p><img src="https://img-blog.csdnimg.cn/20200225231300980.png" alt="在这里插入图片描述"><br>例题：<br><img src="https://img-blog.csdnimg.cn/20200225231438778.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<hr>
-<h2 id="C-b-矩阵的秩"><a href="#C-b-矩阵的秩" class="headerlink" title="C.b 矩阵的秩"></a>C.b 矩阵的秩</h2><p><img src="https://img-blog.csdnimg.cn/2020022523151992.png" alt="在这里插入图片描述"><br>例题：<br><img src="https://img-blog.csdnimg.cn/20200225231738565.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="C-c-矩阵的迹"><a href="#C-c-矩阵的迹" class="headerlink" title="C.c 矩阵的迹"></a>C.c 矩阵的迹</h2><p><img src="https://img-blog.csdnimg.cn/20200225231809926.png" alt="在这里插入图片描述"><br>例子：<br><img src="https://img-blog.csdnimg.cn/20200225231839886.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<hr>
-<h2 id="C-d-向量和矩阵的范数"><a href="#C-d-向量和矩阵的范数" class="headerlink" title="C.d 向量和矩阵的范数"></a>C.d 向量和矩阵的范数</h2><p>矩阵或向量的范数用来度量矩阵或向量在某种意义下的长度。<br><img src="https://img-blog.csdnimg.cn/20200225232020998.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200225232059755.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200225232210345.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200225232314833.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<hr>
-<h2 id="C-e-矩阵的条件数"><a href="#C-e-矩阵的条件数" class="headerlink" title="C.e 矩阵的条件数"></a>C.e 矩阵的条件数</h2><p><img src="https://img-blog.csdnimg.cn/20200225232406378.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200225232453185.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>例题：<br><img src="https://img-blog.csdnimg.cn/20200225232536340.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<hr>
-<h1 id="D-矩阵的特征值与特征向量"><a href="#D-矩阵的特征值与特征向量" class="headerlink" title="D 矩阵的特征值与特征向量"></a>D 矩阵的特征值与特征向量</h1><h2 id="D-a-矩阵特征值的数学定义"><a href="#D-a-矩阵特征值的数学定义" class="headerlink" title="D.a 矩阵特征值的数学定义"></a>D.a 矩阵特征值的数学定义</h2><p><img src="https://img-blog.csdnimg.cn/20200226010535257.png" alt="在这里插入图片描述"></p>
-<hr>
-<h2 id="D-b-求矩阵的特征值和特征向量"><a href="#D-b-求矩阵的特征值和特征向量" class="headerlink" title="D.b 求矩阵的特征值和特征向量"></a>D.b 求矩阵的特征值和特征向量</h2><p><img src="https://img-blog.csdnimg.cn/20200226010633561.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>例子：A*X(:,1)&#x3D;D(1)*X(:,1)<br><img src="https://img-blog.csdnimg.cn/20200226010826919.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>例题：<br><img src="https://img-blog.csdnimg.cn/20200226011313434.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>X3对角为X1和X2，</p>
-<hr>
-<h2 id="D-c-特征值的几何意义"><a href="#D-c-特征值的几何意义" class="headerlink" title="D.c 特征值的几何意义"></a>D.c 特征值的几何意义</h2><p><img src="https://img-blog.csdnimg.cn/20200226012010606.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>y1和y2分别是x1和x2经过A矩阵变换得到的。把$\lambda_1、\lambda_2$当作伸缩因子，y1和y2是x1和x2经过$\lambda_1、\lambda_2$伸缩以后的结果，如图所示。<br>更进一步地，连续取单位向量x，让它大小保持唯一，那么Ax就将圆弧拉伸，变成椭圆弧。<br><img src="https://img-blog.csdnimg.cn/20200226012651958.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200226012854481.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200226013028960.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<hr>
-<h1 id="E-稀疏矩阵"><a href="#E-稀疏矩阵" class="headerlink" title="E 稀疏矩阵"></a>E 稀疏矩阵</h1><p>稀疏矩阵指的是零元素个数远远多于非零元素个数的矩阵，如果将大量的零元素也存储起来，必将导致存储空间的浪费。为此，MATLAB为稀疏矩阵提供特殊的存储方式。</p>
-<h2 id="E-a矩阵的存储方式"><a href="#E-a矩阵的存储方式" class="headerlink" title="E.a矩阵的存储方式"></a>E.a矩阵的存储方式</h2><p><img src="https://img-blog.csdnimg.cn/20200226022859678.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>例子：<br><img src="https://img-blog.csdnimg.cn/20200226023031222.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<hr>
-<h2 id="E-b-稀疏存储方式的产生"><a href="#E-b-稀疏存储方式的产生" class="headerlink" title="E.b 稀疏存储方式的产生"></a>E.b 稀疏存储方式的产生</h2><p><img src="https://img-blog.csdnimg.cn/20200226023122506.png" alt="在这里插入图片描述"><br>例子：<br><img src="https://img-blog.csdnimg.cn/20200226023304423.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<hr>
-<p><img src="https://img-blog.csdnimg.cn/2020022602350310.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>例子：<br><img src="https://img-blog.csdnimg.cn/2020022602353898.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<hr>
-<p><img src="https://img-blog.csdnimg.cn/2020022602383560.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>用A的一行元素表示一个稀疏矩阵的元素，相当于A每一行的每个元素是相应的稀疏矩阵元素的一个信息。这些信息组合经过<code>spconvert</code>就可以得到相应的稀疏矩阵元素。<br>例子：<br>A描述的稀疏矩阵：[2，2，1：第二行第二列的1；2，1，-1：第二行第一列的-1；2，4，3：第二行第四列的3；其他为0。]经过<code>spconvert</code>实现A描述的稀疏矩阵。<br><img src="https://img-blog.csdnimg.cn/20200226024306977.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<hr>
-<p><img src="https://img-blog.csdnimg.cn/20200226024731653.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200226024859640.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>例子：<br><img src="https://img-blog.csdnimg.cn/20200226025105454.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200226030758808.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>A的稀疏存储：<br><img src="https://img-blog.csdnimg.cn/20200226025205518.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<hr>
-<p><img src="https://img-blog.csdnimg.cn/20200226025314929.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<hr>
-<h2 id="E-c-稀疏矩阵应用举例"><a href="#E-c-稀疏矩阵应用举例" class="headerlink" title="E.c 稀疏矩阵应用举例"></a>E.c 稀疏矩阵应用举例</h2><p><img src="https://img-blog.csdnimg.cn/20200226025405639.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">clc;clear</span><br><span class="line">kf1= [1;1;2;1;0];     % 主对角线以下第一条元素</span><br><span class="line">k0 = [2;4;6;6;1];     % 主对角线元素</span><br><span class="line">k1 = [0;3;1;4;2];     % 主对角线以上第一条元素</span><br><span class="line">B = [kf1,k0,k1];</span><br><span class="line">d = [-1;0;1];</span><br><span class="line">A = spdiags(B,d,5,5); % 产生稀疏存储的稀疏矩阵</span><br><span class="line">f = [0;3;2;1;5];</span><br><span class="line">x = A\f               %求出解</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20200226031806642.png" alt="在这里插入图片描述"></p>
-<hr>
-<blockquote>
-<p>图片来源：<br><a href="https://www.icourse163.org/search.htm?search=%E4%B8%AD%E5%8D%97%E5%A4%A7%E5%AD%A6%20Matlab#/">https://www.icourse163.org/search.htm?search=%E4%B8%AD%E5%8D%97%E5%A4%A7%E5%AD%A6%20Matlab#/</a></p>
 </blockquote>
 ]]></content>
       <categories>
@@ -832,6 +832,31 @@
       </tags>
   </entry>
   <entry>
+    <title>复现题目环境的搭建</title>
+    <url>/2022/07/10/pwn/%E5%A4%8D%E7%8E%B0%E9%A2%98%E7%9B%AE%E7%9A%84%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
+    <content><![CDATA[<h1 id="复现题目的环境搭建"><a href="#复现题目的环境搭建" class="headerlink" title="复现题目的环境搭建"></a>复现题目的环境搭建</h1><h2 id="使用socat"><a href="#使用socat" class="headerlink" title="使用socat"></a>使用socat</h2><p>Ubuntu16，20均测试过可以使用</p>
+<p>借鉴的博客：</p>
+<p><a href="https://xineting.github.io/2018/10/01/pwn%E9%A2%98%E7%9B%AE%E7%9A%84%E6%90%AD%E5%BB%BA/">https://xineting.github.io/2018/10/01/pwn%E9%A2%98%E7%9B%AE%E7%9A%84%E6%90%AD%E5%BB%BA/</a></p>
+<h2 id="使用ctf-xinetd-ctf竞赛权威指南-pwn篇"><a href="#使用ctf-xinetd-ctf竞赛权威指南-pwn篇" class="headerlink" title="使用ctf-xinetd(ctf竞赛权威指南 pwn篇)"></a>使用ctf-xinetd(ctf竞赛权威指南 pwn篇)</h2><p>Linux版本：Ubuntu16.04</p>
+<span id="more"></span>
+
+<p>借鉴的博客：</p>
+<p>docker安装：<a href="https://blog.csdn.net/weixin_45358193/article/details/103679142">https://blog.csdn.net/weixin_45358193/article/details/103679142</a></p>
+<p>相关的配置：<a href="https://blog.csdn.net/weixin_46521144/article/details/120572274">https://blog.csdn.net/weixin_46521144/article/details/120572274</a></p>
+<p>ctf竞赛权威指南(pwn篇)：P100~P103</p>
+<p>缺点：一次只能部署一题，适用于自己在本地练习</p>
+<h2 id="使用pwn-deploy-chroot"><a href="#使用pwn-deploy-chroot" class="headerlink" title="使用pwn_deploy_chroot"></a>使用pwn_deploy_chroot</h2><p>Linux版本：Ubuntu20.04</p>
+<p>借鉴的博客：</p>
+<p>多题部署：<a href="https://blog.csdn.net/u012763794/article/details/82988934">https://blog.csdn.net/u012763794/article/details/82988934</a></p>
+]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>pwn</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>pwn学习路线</title>
     <url>/2022/06/01/pwn/pwn%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/</url>
     <content><![CDATA[<p>CTFwiki：<a href="https://ctf-wiki.org/pwn/linux/user-mode/environment/">https://ctf-wiki.org/pwn/linux/user-mode/environment/</a></p>
@@ -997,31 +1022,6 @@
 
 <p>用aaaa%4$p打印看看(a的ASCII值是0x61)</p>
 <img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220502193443643.png" alt="image-20220502193443643" style="zoom:80%;" />
-]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
-      <tags>
-        <tag>pwn</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>复现题目环境的搭建</title>
-    <url>/2022/07/10/pwn/%E5%A4%8D%E7%8E%B0%E9%A2%98%E7%9B%AE%E7%9A%84%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
-    <content><![CDATA[<h1 id="复现题目的环境搭建"><a href="#复现题目的环境搭建" class="headerlink" title="复现题目的环境搭建"></a>复现题目的环境搭建</h1><h2 id="使用socat"><a href="#使用socat" class="headerlink" title="使用socat"></a>使用socat</h2><p>Ubuntu16，20均测试过可以使用</p>
-<p>借鉴的博客：</p>
-<p><a href="https://xineting.github.io/2018/10/01/pwn%E9%A2%98%E7%9B%AE%E7%9A%84%E6%90%AD%E5%BB%BA/">https://xineting.github.io/2018/10/01/pwn%E9%A2%98%E7%9B%AE%E7%9A%84%E6%90%AD%E5%BB%BA/</a></p>
-<h2 id="使用ctf-xinetd-ctf竞赛权威指南-pwn篇"><a href="#使用ctf-xinetd-ctf竞赛权威指南-pwn篇" class="headerlink" title="使用ctf-xinetd(ctf竞赛权威指南 pwn篇)"></a>使用ctf-xinetd(ctf竞赛权威指南 pwn篇)</h2><p>Linux版本：Ubuntu16.04</p>
-<span id="more"></span>
-
-<p>借鉴的博客：</p>
-<p>docker安装：<a href="https://blog.csdn.net/weixin_45358193/article/details/103679142">https://blog.csdn.net/weixin_45358193/article/details/103679142</a></p>
-<p>相关的配置：<a href="https://blog.csdn.net/weixin_46521144/article/details/120572274">https://blog.csdn.net/weixin_46521144/article/details/120572274</a></p>
-<p>ctf竞赛权威指南(pwn篇)：P100~P103</p>
-<p>缺点：一次只能部署一题，适用于自己在本地练习</p>
-<h2 id="使用pwn-deploy-chroot"><a href="#使用pwn-deploy-chroot" class="headerlink" title="使用pwn_deploy_chroot"></a>使用pwn_deploy_chroot</h2><p>Linux版本：Ubuntu20.04</p>
-<p>借鉴的博客：</p>
-<p>多题部署：<a href="https://blog.csdn.net/u012763794/article/details/82988934">https://blog.csdn.net/u012763794/article/details/82988934</a></p>
 ]]></content>
       <categories>
         <category>CTF</category>
@@ -1315,7 +1315,7 @@
 
 ]]></content>
       <categories>
-        <category>pwn</category>
+        <category>CTF</category>
       </categories>
       <tags>
         <tag>pwn</tag>
